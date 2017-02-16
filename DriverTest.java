@@ -92,4 +92,11 @@ public class DriverTest {
 		assertEquals(5, d.getNumberSennottVisits());
 	}
 	
+	
+	//	Check that Driver equals itself
+	@Test
+	public void testDriverEqualsSelf() {
+		Driver d = new Driver(2,3);
+		assertEquals(d,d);
+	}
 }
