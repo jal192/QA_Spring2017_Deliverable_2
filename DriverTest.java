@@ -24,6 +24,7 @@ public class DriverTest {
 		assertEquals(3, d.getLocation());
 	}
 	
+	
 	//	Test that checks if the driver's location changes after setting a new location 
 	
 	//	Create a driver object that has a driver ID 1 and at location 3
@@ -36,6 +37,7 @@ public class DriverTest {
 		assertEquals(10, d.getLocation());
 	}
 	
+	
 	//	Test to check if the initialized driver id matches the return id of the driver
 	//	The method should always return the driver's id value
 	
@@ -46,4 +48,48 @@ public class DriverTest {
 		Driver d = new Driver(1, 3);
 		assertEquals(1, d.getDriverID());
 	}
+	
+	
+	//	Test to check if the initial default number of times the driver has visited Sennott is 0
+	//	The method should always return 0, since when the object is created the user has not visited Sennott
+	//	Assume that a check hasn't been done to test if the starting position of the driver is Sennott
+	
+	//	Create driver object
+	//	Retrieve the current number of times the driver has visited Sennott which should always be 0
+	@Test
+	public void testGetCurrentNumberSennottVisits() {
+		Driver d = new Driver(5, 2);
+		assertEquals(0, d.getNumberSennottVisits());
+	}
+	
+
+	//	Test to check if the number of times the driver has visited Sennott is incremented by 1
+	//	Ensure that counter is only incremented by 1
+	
+	//	Create driver object
+	//	Simulate the driver visiting Sennott once
+	//	Resulting total number of visits should always be 1
+	@Test
+	public void testIncrementNumberSennottVisits() {
+		Driver d = new Driver(1, 3);
+		d.incrementVisitCounter();
+		assertEquals(1, d.getNumberSennottVisits());
+	}
+	
+	
+	//	Test to check if the number of times the driver has visited Sennott is incremented by 1 multiple times
+	//	Ensure that number of visits is properly updated when calling the method
+	
+	//	Create driver object
+	//	Simulate the driver visiting Sennott 5 times
+	//	Resulting total number of visits should alwaus be 5
+	@Test
+	public void testMultipleVisits() {
+		Driver d = new Driver(1, 3);
+		for(int i = 0; i < 5; i++) {
+			d.incrementVisitCounter();
+		}
+		assertEquals(5, d.getNumberSennottVisits());
+	}
+	
 }
