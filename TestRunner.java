@@ -12,6 +12,7 @@ public class TestRunner {
 		// ADD ANY MORE CLASSES YOU WISH TO TEST HERE
 		
 		classesToTest.add(DriverTest.class);
+		classesToTest.add(LocationNodeTest.class);
 		
 		// For all test classes added, loop through and use JUnit
 		// to run them.
@@ -33,6 +34,9 @@ public class TestRunner {
 			
 			if (!r.wasSuccessful()) {
 				anyFailures = true;
+			}
+			else {
+				System.out.println("\n" + c.getSimpleName() + " > Tests were successful!");
 			}
 			
 		}
