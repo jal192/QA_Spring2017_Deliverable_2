@@ -179,9 +179,6 @@ public class LocationNodeTest {
 		assertNull(outsideCity.getLocByStreet());
 	}
 	
-	
-	
-	
 
 }
 	
