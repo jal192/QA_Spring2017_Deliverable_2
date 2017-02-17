@@ -100,6 +100,32 @@ public class LocationNodeTest {
 	}
 	
 	
+	//	Test using Mockito
+	
+	@Test
+	public void testGetLocByAvenueAfter2Traversals() {
+		LocationNode startLoc = new LocationNode("Presby", 1, "Fourth Avenue.", "Bill St.");
+		LocationNode firstAveTravel = new LocationNode("Union", 2, "Fourth Avenue.", "Phil St.");
+		startLoc.setLocByAvenue(firstAveTravel);
+		LocationNode secondAveTravel = Mockito.mock(LocationNode.class);
+		firstAveTravel.setLocByAvenue(secondAveTravel);
+		assertSame(secondAveTravel, startLoc.getLocByAvenue().getLocByAvenue());
+	}
+	
+	
+	//	Simulates a two way street
+	
+	@Test
+	public void testGetLocByStreetAfter2Traversals() {
+		LocationNode startLoc = new LocationNode("Union", 1, "Fourth Avenue.", "Phil St.");
+		LocationNode firstStreetTravel = new LocationNode("Hillman", 2, "Fifth Avenue.", "Phil St.");
+		startLoc.setLocByStreet(firstStreetTravel);
+		firstStreetTravel.setLocByStreet(startLoc);
+		assertSame(startLoc, startLoc.getLocByStreet().getLocByStreet());
+	}
+	
+	
+	
 	
 	//#############################################################################
 	//###########	TESTS FOR CONSTRUCTOR THAT EMULATES OUTSIDE CITY	###########
