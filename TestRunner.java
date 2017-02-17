@@ -13,11 +13,17 @@ public class TestRunner {
 		
 		classesToTest.add(DriverTest.class);
 		classesToTest.add(LocationNodeTest.class);
+		classesToTest.add(CitySim9004Test.class);
 		
 		// For all test classes added, loop through and use JUnit
 		// to run them.
 		
 		for (Class c: classesToTest) {
+			
+			String classname = c.getSimpleName();
+			
+			System.out.println("\nStarting tests for " + classname);
+			
 			Result r = JUnitCore.runClasses(c);
 
 			// Print out any failures for this class.
@@ -36,7 +42,7 @@ public class TestRunner {
 				anyFailures = true;
 			}
 			else {
-				System.out.println("\n" + c.getSimpleName() + " > Tests were successful!");
+				System.out.println("\n" + classname + " > Tests were successful!");
 			}
 			
 		}
