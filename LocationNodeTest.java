@@ -13,7 +13,9 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import org.mockito.*;
+import org.mockito.*; 
+import java.util.*;
+import java.io.*;
 
 public class LocationNodeTest {
 
@@ -66,64 +68,53 @@ public class LocationNodeTest {
 	
 	//
 	@Test
-	public void testGetLocByAvenueNull_B() {
+	public void testGetLocByAvenueZero_B() {
 		LocationNode testLoc = new LocationNode("Union", 1, "Fourth Avenue.", "Phil St.");
-		assertNull(testLoc.getLocByAvenue());
+		assertEquals(0, testLoc.getLocByAvenue());
 	}
 	
 	
 	//
 	@Test
-	public void testGetLocByStreetNull_B() {
+	public void testGetLocByStreetZero_B() {
 		LocationNode testLoc = new LocationNode("Union", 1, "Fourth Avenue.", "Phil St.");
-		assertNull(testLoc.getLocByStreet());
+		assertEquals(0, testLoc.getLocByStreet());
 	}
 	
 	
-	//	Test using Mockito
+	// 
+	//	
 	@Test
 	public void testSetLocByAvenue_B() {
-		LocationNode testLoc = new LocationNode("Union", 1, "Fourth Avenue.", "Phil St.");
+		
+		LocationNode StartLoc = new LocationNode("Union", 1, "Fourth Avenue.", "Phil St.");
 		LocationNode mockLocNodeAve = Mockito.mock(LocationNode.class);
-		testLoc.setLocByAvenue(mockLocNodeAve);
-		assertSame(mockLocNodeAve, testLoc.getLocByAvenue());
+		
+		Mockito.when(mockLocNodeAve.getLocByAvenue()).thenReturn(2);
+		
+		StartLoc.setLocByAvenue(mockLocNodeAve.getLocByAvenue());
+		
+		int returnVal = StartLoc.getLocByAvenue();
+		
+		assertEquals(returnVal, 2);
 	}
 	
 	
-	//	Test using Mockito
+	//	
 	@Test
 	public void testSetLocByStreet_B() {
-		LocationNode testLoc = new LocationNode("Union", 1, "Fourth Avenue.", "Phil St.");
+
+		LocationNode StartLoc = new LocationNode("Union", 1, "Fourth Avenue.", "Phil St.");
 		LocationNode mockLocNodeStreet = Mockito.mock(LocationNode.class);
-		testLoc.setLocByStreet(mockLocNodeStreet);
-		assertSame(mockLocNodeStreet, testLoc.getLocByStreet());
+		
+		Mockito.when(mockLocNodeStreet.getLocByStreet()).thenReturn(4);
+		
+		StartLoc.setLocByStreet(mockLocNodeStreet.getLocByStreet());
+		
+		int returnVal = StartLoc.getLocByStreet();
+		
+		assertEquals(returnVal, 4);
 	}
-	
-	
-	//	Test using Mockito
-	
-	@Test
-	public void testGetLocByAvenueAfter2Traversals() {
-		LocationNode startLoc = new LocationNode("Presby", 1, "Fourth Avenue.", "Bill St.");
-		LocationNode firstAveTravel = new LocationNode("Union", 2, "Fourth Avenue.", "Phil St.");
-		startLoc.setLocByAvenue(firstAveTravel);
-		LocationNode secondAveTravel = Mockito.mock(LocationNode.class);
-		firstAveTravel.setLocByAvenue(secondAveTravel);
-		assertSame(secondAveTravel, startLoc.getLocByAvenue().getLocByAvenue());
-	}
-	
-	
-	//	Simulates a two way street
-	
-	@Test
-	public void testGetLocByStreetAfter2Traversals() {
-		LocationNode startLoc = new LocationNode("Union", 1, "Fourth Avenue.", "Phil St.");
-		LocationNode firstStreetTravel = new LocationNode("Hillman", 2, "Fifth Avenue.", "Phil St.");
-		startLoc.setLocByStreet(firstStreetTravel);
-		firstStreetTravel.setLocByStreet(startLoc);
-		assertSame(startLoc, startLoc.getLocByStreet().getLocByStreet());
-	}
-	
 	
 	
 	
@@ -168,7 +159,7 @@ public class LocationNodeTest {
 	@Test
 	public void testGetLocByAvenue_O() {
 		LocationNode outsideCity = new LocationNode("Philadelphia", 5);
-		assertNull(outsideCity.getLocByAvenue());
+		assertEquals(0, outsideCity.getLocByAvenue());
 	}
 	
 	
@@ -176,7 +167,7 @@ public class LocationNodeTest {
 	@Test
 	public void testGetLocByStreet_O() {
 		LocationNode outsideCity = new LocationNode("Philadelphia", 5);
-		assertNull(outsideCity.getLocByStreet());
+		assertEquals(0, outsideCity.getLocByStreet());
 	}
 	
 
