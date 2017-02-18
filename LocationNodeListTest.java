@@ -66,6 +66,42 @@ public class LocationNodeListTest {
 		
 		assertEquals(5, locList.size());
 	}
+	
+	
+	//	Ensure that setting a new list overwrites the previous list
+	@Test
+	public void testSetCityMap() {
+		LocationNodeList lList = new LocationNodeList();
+		
+		ArrayList<LocationNode> tempList = new ArrayList<LocationNode>();
+		
+		LocationNode mockLoc1 = Mockito.mock(LocationNode.class);
+		LocationNode mockLoc2 = Mockito.mock(LocationNode.class);
+		LocationNode mockLoc3 = Mockito.mock(LocationNode.class);
+		
+		tempList.add(mockLoc1);
+		tempList.add(mockLoc2);
+		tempList.add(mockLoc3);
+		
+		lList.setCityMap(tempList);
+		
+		ArrayList<LocationNode> getLocList = new ArrayList<LocationNode>();
+		getLocList = lList.getCityMap();
+		
+		assertSame(tempList, getLocList);
+	}
+	
+	//	Ensure that getting the list of location nodes is empty when a new list is initialized
+	@Test
+	public void testGetListEmpty() {
+		
+		LocationNodeList lList = new LocationNodeList();
+		
+		ArrayList<LocationNode> getLocList = new ArrayList<LocationNode>();
+		getLocList = lList.getCityMap();
+		
+		assertEquals(0, getLocList.size());
+	}
 }
 
 
