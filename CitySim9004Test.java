@@ -12,19 +12,19 @@
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-
 import org.mockito.*;
+import java.util.*;
 
 public class CitySim9004Test {
 	
 	
 	//	Check if checkNumbArgs method performs the intended behavior
-	//	Simulation continues when user enters one argument
+	//	Simulation continues when user enters one argument 
 	//	This doesn't test if the actual input values are correct
 	//	Only tests the quantity of arguments
 
 	@Test
-	public void testCheckNumbArgsOneArg() {
+	public void testCheckNumbArgsOneArgWrongType() {
 		
 		String[] args = {"temp"};
 		CitySim9004 citySim = new CitySim9004(args);
@@ -68,7 +68,7 @@ public class CitySim9004Test {
 	@Test
 	public void testCheckValidIntGood() {
 		
-		String[] args = {"1"};
+		String[] args = {"10"};
 		CitySim9004 citySim = new CitySim9004(args);
 		Integer returnVal = citySim.checkValidInt(args);
 		assertNotNull(returnVal);
@@ -108,7 +108,41 @@ public class CitySim9004Test {
 	}
 	
 	
+	//	There should always be 5 locations that are intialized and set up
+	@Test
+	public void testInitializeLocations() {
+		
+		String[] tempArgs = {"1"};
+		CitySim9004 CitySim = new CitySim9004(tempArgs);
+		
+		ArrayList<LocationNode> locList = new ArrayList<LocationNode>();
+		
+		locList = CitySim.initializeLocations(locList);
+		
+		assertEquals(5, locList.size());
+	}
 	
 	
+	//	
+	//	
+	
+	@Test
+	public void testCheckNumbVisitsGreaterThanThree() {
+		
+	}
+	
+	
+	//
+	@Test
+	public void testCheckNumbVisitsThree() {
+		
+	}
+	
+	
+	//
+	@Test
+	public void testCheckNumbVisitsLessThanThree() {
+		
+	}
 	
 }
