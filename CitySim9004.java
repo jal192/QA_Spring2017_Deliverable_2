@@ -131,10 +131,8 @@ public class CitySim9004 {
 					} while(driverLeavesCity == false);
 					
 					System.out.println("Driver " + driver.getDriverID() + " met with Professor Laboon " + driver.getNumberSennottVisits() + " time(s).");
-					
-					boolean visited3Plus = checkNumbVisitsGreaterEqualThree(driver);
-					
-					if(visited3Plus == true) {
+
+					if(driver.checkNumbVisitsGreaterEqualThree() == true) {
 						System.out.println("Wow, that driver needed lots of CS help!");
 					}
 					
@@ -180,21 +178,6 @@ public class CitySim9004 {
 		}
 		
 		return val;
-	}
-	
-	
-	//
-	public boolean checkNumbVisitsGreaterEqualThree(Driver d) {
-		
-		boolean printCSHelpMessage = false;
-		
-		int numberVists = d.getNumberSennottVisits();
-		
-		if(numberVists >= 3) {
-			printCSHelpMessage = true;
-		}
-		
-		return printCSHelpMessage;
 	}
 	
 	
