@@ -93,6 +93,37 @@ public class DriverTest {
 	}
 	
 	
+	//
+	@Test
+	public void testCheckNumbVisitsGreaterThanThree() {
+		Driver d = new Driver(1, 3);
+		for(int i = 0; i < 5; i++) {
+			d.incrementVisitCounter();
+		}
+		assertTrue(d.checkNumbVisitsGreaterEqualThree());
+	}
+	
+	
+	//
+	@Test
+	public void testCheckNumbVisitsThree() {
+		Driver d = new Driver(1, 2);
+		for(int i = 0; i < 3; i++) {
+			d.incrementVisitCounter();
+		}
+		assertTrue(d.checkNumbVisitsGreaterEqualThree());
+	}
+	
+	
+	//	Ensure that if the number of times the driver has visited Sennott is less than three that 
+	//	a flag indicating whether or not to print the corresponding message is false.
+	@Test
+	public void testCheckNumbVisitsLessThanThree() {
+		Driver d = new Driver(1, 2);
+		assertFalse(d.checkNumbVisitsGreaterEqualThree());
+	}
+	
+	
 	//	Check that Driver equals itself
 	@Test
 	public void testDriverEqualsSelf() {
