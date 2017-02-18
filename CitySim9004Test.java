@@ -107,23 +107,4 @@ public class CitySim9004Test {
 		
 	}
 	
-	@Test
-	public void testCheckNumbVisitsGreaterThanThree() {
-	
-	
-	}
-	
-	//
-	@Test
-	public void testCheckNumbVisitsThree() {
-		
-	}
-	
-	
-	//
-	@Test
-	public void testCheckNumbVisitsLessThanThree() {
-		
-	}
-	
 }
