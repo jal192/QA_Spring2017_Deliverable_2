@@ -59,6 +59,10 @@ public class LocationNodeList {
 		this.lList.add(outsideCity);
 	}
 	
+	public void setCityMap(ArrayList<LocationNode> newList) {
+		this.lList = newList;
+	}
+	
 	public ArrayList<LocationNode> getCityMap() {
 		return this.lList;
 	}
