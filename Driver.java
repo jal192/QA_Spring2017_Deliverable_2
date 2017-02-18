@@ -45,4 +45,20 @@ public class Driver {
 	public void incrementVisitCounter() {
 		this.numberVisitsSennott++;
 	}
+	
+	//	Check if the number of times the driver has visited equals three or more times
+	//	If so then the message displaying that the driver needs a lot of help should be displayed
+	//	Else do nothing
+	public boolean checkNumbVisitsGreaterEqualThree() {
+		
+		boolean printCSHelpMessage = false;
+		
+		int numberVists = this.getNumberSennottVisits();
+		
+		if(numberVists >= 3) {
+			printCSHelpMessage = true;
+		}
+		
+		return printCSHelpMessage;
+	}
 }
