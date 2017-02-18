@@ -3,7 +3,12 @@
 	2/20/17
 	cs1632
 	Deliverable 2
+
+	#########################################
+	####### TODO Need to add comments #######
+	#########################################	
 	
+	Using seed number 3 displays driver needing help message
 */
 
 import java.util.*;
@@ -14,14 +19,24 @@ public class CitySim9004 {
 
 	private boolean valid;
 	private Integer seed;
-
+	private ArrayList<Driver> driverList;
+	private ArrayList<LocationNode> locationList;
+	private String outsideCityPhil;
+	private String outsideCityClev;
+	
+	
 	public static void main(String[] args) {
 		
 		CitySim9004 sim = new CitySim9004(args);
 		
 	}
 	
+	
+	//
 	public CitySim9004(String[] args) {
+		
+		outsideCityPhil = "Philadelphia";
+		outsideCityClev = "Cleveland";
 		
 		//	Set up random number generator
 		Random rng = new Random();
@@ -38,31 +53,116 @@ public class CitySim9004 {
 				
 				//	Set seed for random number generator
 				rng.setSeed(seed);
+				
+				//	Initialize all possible locations
+				locationList = new ArrayList<LocationNode>();
+				locationList = initializeLocations(locationList);
+				
+				for(int i = 1; i < 6; i++) {
+					
+					boolean driverLeavesCity = false;
+					
+					int startPos = rng.nextInt(4) + 1;
+					Driver driver = new Driver(i, startPos);
+					
+					//System.out.println("Start: " + startPos);
+					
+					do {
+						
+						//	Check if the user is currently at Sennott, also takes care of case where user starts at Sennott
+						if(driver.getLocation() == 3) {
+							driver.incrementVisitCounter();
+						}
+						
+						//	Get the current location node of the driver
+						LocationNode current = locationList.get(driver.getLocation()-1);
+						
+						int nextLocation = 0;
+						
+						//	1 represents avenue
+						//	2 represents street
+						int selectPath = rng.nextInt(2) + 1;
+						
+						//System.out.println(selectPath);
+						
+						if(selectPath == 1) {
+							int nextLocationID = current.getLocByAvenue();
+							driver.setNewLocation(nextLocationID);
+							
+							//System.out.println("LocationID " + nextLocationID);
+							
+							LocationNode endDestination = locationList.get(driver.getLocation()-1);
+							
+							if(nextLocationID != 5) {
+								System.out.println("Driver " + driver.getDriverID() + " heading from " + current.getLocationName() + " to " + 
+													endDestination.getLocationName() + " via " + current.getAvenueName());
+							}
+							else if(nextLocationID == 5) {
+								driverLeavesCity = true;
+								
+								System.out.println("Driver " + driver.getDriverID() + " heading from " + current.getLocationName() + " to " + 
+													endDestination.getLocationName() + " via " + current.getAvenueName());
+								
+								if(current.getLocationID() == 2) {
+									System.out.println("Driver " + driver.getDriverID() + " has gone to " + outsideCityPhil + "!");
+								}
+								else if(current.getLocationID() == 3) {
+									System.out.println("Driver " + driver.getDriverID() + " has gone to " + outsideCityClev + "!");
+								}
+							}
+						}
+						else if(selectPath == 2) {
+							int nextLocationID = current.getLocByStreet();
+							driver.setNewLocation(nextLocationID);
+							
+							//System.out.println("LocationID " + nextLocationID);
+							
+							LocationNode endDestination = locationList.get(driver.getLocation()-1);
+							
+							System.out.println("Driver " + driver.getDriverID() + " heading from " + current.getLocationName() + " to " + 
+												endDestination.getLocationName() + " via " + endDestination.getStreetName());
+						}
+						
+					} while(driverLeavesCity == false);
+					
+					System.out.println("Driver " + driver.getDriverID() + " met with Professor Laboon " + driver.getNumberSennottVisits() + " time(s).");
+					
+					boolean visited3Plus = checkNumbVisitsGreaterEqualThree(driver);
+					
+					if(visited3Plus == true) {
+						System.out.println("Wow, that driver needed lots of CS help!");
+					}
+					
+					System.out.println("-----");
+					
+				}
 			}
+			else {
+				System.out.println("Error: Seed input is not a valid integer.");
+			}
+		}
+		else {
+			System.out.println("Too Many or Zero Arguments Found!");
+			System.out.println("Proper Usage is: java CitySim9004 <Seed Integer>");
 		}
 	}
 	
+	
+	//
 	public boolean checkNumbArgs(String[] a) {
 		
 		boolean check = false;
 		
 		//	Check if the user entered a seed integer
-		if(a.length == 0)
-		{
-			System.out.println("No Arguments found!");
-			System.out.println("Proper Usage is: java CitySim9004 <Seed Integer>");
-		}
-		else if(a.length > 1) {
-			System.out.println("Too Many Arguments Found!");
-			System.out.println("Proper Usage is: java CitySim9004 <Seed Integer>");
-		}
-		else if(a.length == 1) {
+		if(a.length == 1) {
 			check = true;
 		}
 		
 		return check;
 	}
 	
+	
+	//
 	public Integer checkValidInt(String[] a) {
 		String seedString = a[0];
 		
@@ -70,11 +170,69 @@ public class CitySim9004 {
 		
 		try {
 			val = Integer.parseInt(seedString);
-		} catch(NumberFormatException numbFormError) {
-			System.out.println("Error: Seed input is not a valid integer.");
+		} catch(Exception e) {
+			val = null;
 		}
 		
 		return val;
 	}
-
+	
+	
+	//
+	public boolean checkNumbVisitsGreaterEqualThree(Driver d) {
+		
+		boolean printCSHelpMessage = false;
+		
+		int numberVists = d.getNumberSennottVisits();
+		
+		if(numberVists >= 3) {
+			printCSHelpMessage = true;
+		}
+		
+		return printCSHelpMessage;
+	}
+	
+	
+	//
+	public ArrayList<LocationNode> initializeLocations(ArrayList<LocationNode> lList) {
+		
+		//	Create locations for the 4 buildings in the city and 2 locations outside the city
+		LocationNode presby = new LocationNode("Presby", 1, "Fourth Ave.", "Bill St.");
+		LocationNode union = new LocationNode("Union", 2, "Fourth Ave.", "Phil St.");
+		LocationNode sennott = new LocationNode("Sennott", 3, "Fifth Ave.", "Bill St.");
+		LocationNode hillman = new LocationNode("Hillman", 4, "Fifth Ave.", "Phil St.");
+		
+		LocationNode outsideCity = new LocationNode("Outside City", 5);
+		
+		//	Set up conections for Presby
+		presby.setLocByAvenue(2);
+		presby.setLocByStreet(3);
+		
+		
+		//	Set up conections for Union
+		union.setLocByAvenue(5);
+		union.setLocByStreet(4);
+		
+		
+		//	Set up conections for Sennott
+		sennott.setLocByAvenue(5);
+		sennott.setLocByStreet(1);
+		
+		
+		//	Set up conections for Hillman
+		hillman.setLocByAvenue(3);
+		hillman.setLocByStreet(2);
+		
+		
+		//	Add all locations to list
+		lList.add(presby);
+		lList.add(union);
+		lList.add(sennott);
+		lList.add(hillman);
+		lList.add(outsideCity);
+		
+		return lList;
+	}
+	
+	
 }
