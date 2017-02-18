@@ -55,8 +55,13 @@ public class CitySim9004 {
 				rng.setSeed(seed);
 				
 				//	Initialize all possible locations
+				LocationNodeList lList = new LocationNodeList();
+				lList.initializeLocations();
+				
+				//	Retrieve the city map
 				locationList = new ArrayList<LocationNode>();
-				locationList = initializeLocations(locationList);
+				locationList = lList.getCityMap();
+				
 				
 				for(int i = 1; i < 6; i++) {
 					
@@ -190,48 +195,6 @@ public class CitySim9004 {
 		}
 		
 		return printCSHelpMessage;
-	}
-	
-	
-	//
-	public ArrayList<LocationNode> initializeLocations(ArrayList<LocationNode> lList) {
-		
-		//	Create locations for the 4 buildings in the city and 2 locations outside the city
-		LocationNode presby = new LocationNode("Presby", 1, "Fourth Ave.", "Bill St.");
-		LocationNode union = new LocationNode("Union", 2, "Fourth Ave.", "Phil St.");
-		LocationNode sennott = new LocationNode("Sennott", 3, "Fifth Ave.", "Bill St.");
-		LocationNode hillman = new LocationNode("Hillman", 4, "Fifth Ave.", "Phil St.");
-		
-		LocationNode outsideCity = new LocationNode("Outside City", 5);
-		
-		//	Set up conections for Presby
-		presby.setLocByAvenue(2);
-		presby.setLocByStreet(3);
-		
-		
-		//	Set up conections for Union
-		union.setLocByAvenue(5);
-		union.setLocByStreet(4);
-		
-		
-		//	Set up conections for Sennott
-		sennott.setLocByAvenue(5);
-		sennott.setLocByStreet(1);
-		
-		
-		//	Set up conections for Hillman
-		hillman.setLocByAvenue(3);
-		hillman.setLocByStreet(2);
-		
-		
-		//	Add all locations to list
-		lList.add(presby);
-		lList.add(union);
-		lList.add(sennott);
-		lList.add(hillman);
-		lList.add(outsideCity);
-		
-		return lList;
 	}
 	
 	
