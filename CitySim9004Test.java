@@ -107,30 +107,11 @@ public class CitySim9004Test {
 		
 	}
 	
-	
-	//	There should always be 5 locations that are intialized and set up
-	@Test
-	public void testInitializeLocations() {
-		
-		String[] tempArgs = {"1"};
-		CitySim9004 CitySim = new CitySim9004(tempArgs);
-		
-		ArrayList<LocationNode> locList = new ArrayList<LocationNode>();
-		
-		locList = CitySim.initializeLocations(locList);
-		
-		assertEquals(5, locList.size());
-	}
-	
-	
-	//	
-	//	
-	
 	@Test
 	public void testCheckNumbVisitsGreaterThanThree() {
-		
-	}
 	
+	
+	}
 	
 	//
 	@Test
