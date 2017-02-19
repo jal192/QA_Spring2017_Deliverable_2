@@ -19,14 +19,13 @@ public class CitySim9004 {
 
 	private static boolean valid;
 	private static Integer seed;
-	private static ArrayList<Driver> driverList;
 	private static ArrayList<LocationNode> locationList;
 	private static String outsideCityPhil;
 	private static String outsideCityClev;
 	private static int numbDrivers;
 	private static boolean driverLeavesCity;
 	private static int startPos;
-	private static int nextLocationID;
+	private static LocationNode nextLocation;
 	private static int selectPath;
 	
 	public static void main(String[] args) {
@@ -69,8 +68,10 @@ public class CitySim9004 {
 					//	Retrieve the starting position from the random number generator
 					startPos = rng.nextInt(4) + 1;
 					
+					LocationNode startPosNode = locationList.get(startPos-1);
+					
 					//	Set the random starting location as the current location of the driver
-					Driver driver = new Driver(i, startPos);
+					Driver driver = new Driver(i, startPosNode);
 					
 					//	Keep looping through simulation steps until the driver has left the city
 					do {
@@ -79,7 +80,8 @@ public class CitySim9004 {
 						driver = cityMap.checkStartPos(driver);
 						
 						//	Get the current location node of the driver
-						LocationNode current = locationList.get(driver.getLocation()-1);
+						int index = locationList.indexOf(driver.getLocation());
+						LocationNode current = locationList.get(index);
 						
 						//	1 represents avenue
 						//	2 represents street
@@ -88,13 +90,14 @@ public class CitySim9004 {
 						//	If the random value obtained is 1, means that the driver follows the avenue route
 						if(selectPath == 1) {
 							//	Get the location ID corresponding to the next destination when traveling by avenue
-							nextLocationID = current.getLocByAvenue();
+							nextLocation = current.getLocByAvenue();
 							
 							//	Update the driver's location with the next location ID
-							driver.setNewLocation(nextLocationID);
+							driver.setNewLocation(nextLocation);
 							
 							//	Retrieve the location node of the destination that the driver is currently at/travelled to
-							LocationNode endDestination = locationList.get(driver.getLocation()-1);
+							index = locationList.indexOf(driver.getLocation());
+							LocationNode endDestination = locationList.get(index);
 							
 							//	Print out the details related to travel
 							System.out.println(cityMap.printDriverTravelByAvenue(driver, current, endDestination));
@@ -105,13 +108,14 @@ public class CitySim9004 {
 						//	If the random value obtained is 2, means that the driver follows the street route
 						else if(selectPath == 2) {
 							//	Get the location ID corresponding to the next destination when traveling by street
-							nextLocationID = current.getLocByStreet();
+							nextLocation = current.getLocByStreet();
 							
 							//	Update the driver's location with the next location ID
-							driver.setNewLocation(nextLocationID);
+							driver.setNewLocation(nextLocation);
 							
 							//	Retrieve the location node of the destination that the driver is currently at/travelled to
-							LocationNode endDestination = locationList.get(driver.getLocation()-1);
+							index = locationList.indexOf(driver.getLocation());
+							LocationNode endDestination = locationList.get(index);
 							
 							//	Print out the details related to travel
 							System.out.println(cityMap.printDriverTravelByStreet(driver, current, endDestination));
@@ -184,7 +188,7 @@ public class CitySim9004 {
 	}
 	
 	
-	//
+	//	Prints out the number of times the driver has visited Laboon
 	public static String printNumbVists(Driver d) {
 		return "Driver " + d.getDriverID() + " met with Professor Laboon " + d.getNumberSennottVisits() + " time(s).";
 	}
