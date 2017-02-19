@@ -97,7 +97,7 @@ public class CitySim9004 {
 							LocationNode endDestination = locationList.get(driver.getLocation()-1);
 							
 							//	Print out the details related to travel
-							cityMap.printDriverTravelByAvenue(driver, current, endDestination);
+							System.out.println(cityMap.printDriverTravelByAvenue(driver, current, endDestination));
 							
 							//	Check if the driver has left the city, if so print the corresponding information
 							driverLeavesCity = cityMap.checkDriverExitCity(driver);
@@ -114,7 +114,7 @@ public class CitySim9004 {
 							LocationNode endDestination = locationList.get(driver.getLocation()-1);
 							
 							//	Print out the details related to travel
-							cityMap.printDriverTravelByStreet(driver, current, endDestination);
+							System.out.println(cityMap.printDriverTravelByStreet(driver, current, endDestination));
 						}
 						
 					} while(driverLeavesCity == false);
