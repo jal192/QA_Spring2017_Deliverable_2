@@ -4,16 +4,14 @@
 	cs1632
 	Deliverable 2
 	
-	#########################################
-	####### TODO Need to add comments #######
-	#########################################
-	
 */
 
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.mockito.*;
 import java.util.*;
+import java.io.*;
+import java.lang.*;
 
 public class CitySim9004Test {
 	
@@ -22,13 +20,20 @@ public class CitySim9004Test {
 	//	Simulation continues when user enters one argument 
 	//	This doesn't test if the actual input values are correct
 	//	Only tests the quantity of arguments
+	
+	//	Ensure that if the user tries to submit/enter a non integer seed values
+	//	that the checkNumbArgs() method will always return false
+	//	The simulation shouldn't be allowed to continue unless it's a single value integer 
+	//	for the seed
 
+	//	Intialize a string array to simulate the arguments that would be inputted
+	//	Run the method with the arguments as the parameter
+	//	Results should always be false
 	@Test
 	public void testCheckNumbArgsOneArgWrongType() {
 		
 		String[] args = {"temp"};
-		CitySim9004 citySim = new CitySim9004(args);
-		boolean returnVal = citySim.checkNumbArgs(args);
+		boolean returnVal = CitySim9004.checkNumbArgs(args);
 		assertTrue(returnVal);
 		
 	}
@@ -36,25 +41,31 @@ public class CitySim9004Test {
 	
 	//	User shouldn't be allowed to continue the simulation execution if they enter 0 arguments
 	//	Testing edge case
+	
+	//	Initialize and empty string array
+	//	Input the array as the parameter for the method
+	//	Results should always be false
 	@Test
 	public void testCheckNumbArgsZeroArg() {
 		
 		String[] args = new String[0];
-		CitySim9004 citySim = new CitySim9004(args);
-		boolean returnVal = citySim.checkNumbArgs(args);
+		boolean returnVal = CitySim9004.checkNumbArgs(args);
 		assertFalse(returnVal);
 		
 	}
 	
 	
 	//	User shouldn't be allowed to continue the simulation execution if they enter more than one argument
-	//	Testing edge case
+	//	Testing boundary cases - number of arguments are beyond what's accepted
+	
+	//	Intialize a string array that contains 3 elements
+	//	Input the array as the parameter for the method
+	//	Results should always be false
 	@Test
 	public void testCheckNumbArgsManyArg() {
 		
-		String[] args = {"1", "2", "NyanLaboonCat"};
-		CitySim9004 citySim = new CitySim9004(args);
-		boolean returnVal = citySim.checkNumbArgs(args);
+		String[] args = {"1", "Rickroll", "NyanLaboonCat"};
+		boolean returnVal = CitySim9004.checkNumbArgs(args);
 		assertFalse(returnVal);
 		
 	}
@@ -64,13 +75,16 @@ public class CitySim9004Test {
 	//	I am assuming that the number of arguments is correct
 	//	Only testing the handling of seed values
 	//	If user enters a valid integer for seed then it should always pass
-
+	
+	//	Intialize a string array that contains a single element that is an integer
+	//	Input the array as the parameter for the method
+	//	Results should always be true because only a valid integer seed should be accepted
+	//	in order to run the simulation
 	@Test
 	public void testCheckValidIntGood() {
 		
 		String[] args = {"10"};
-		CitySim9004 citySim = new CitySim9004(args);
-		Integer returnVal = citySim.checkValidInt(args);
+		Integer returnVal = CitySim9004.checkValidInt(args);
 		assertNotNull(returnVal);
 		
 	}
@@ -80,13 +94,18 @@ public class CitySim9004Test {
 	//	I am assuming that the number of arguments is correct
 	//	Only testing the handling of seed values
 	//	If user enters an invalid input such as a string it should always fail
-
+	
+	//	Ensure that non-integer values for seed input is never accepted
+	
+	//	Intialize a string array that contains a single element that is not an integer
+	//	Input the array as the parameter for the method
+	//	Results should always be false because only a valid integer seed should be accepted
+	//	in order to run the simulation
 	@Test
 	public void testCheckValidIntBadString() {
 		
 		String[] args = {"NyanLaboonCat"};
-		CitySim9004 citySim = new CitySim9004(args);
-		Integer returnVal = citySim.checkValidInt(args);
+		Integer returnVal = CitySim9004.checkValidInt(args);
 		assertNull(returnVal);
 		
 	}
@@ -96,15 +115,32 @@ public class CitySim9004Test {
 	//	I am assuming that the number of arguments is correct
 	//	Only testing the handling of seed values
 	//	If user enters an invalid input such as a floating point number it should always fail
-
+	
+	//	Ensure that non-integer values for seed input is never accepted
+	
+	//	Intialize a string array that contains a single element that is not an integer
+	//	Input the array as the parameter for the method
+	//	Results should always be false because only a valid integer seed should be accepted
+	//	in order to run the simulation
 	@Test
 	public void testCheckValidIntBadFloat() {
 		
 		String[] args = {"3.1415926535897"};
-		CitySim9004 citySim = new CitySim9004(args);
-		Integer returnVal = citySim.checkValidInt(args);
+		Integer returnVal = CitySim9004.checkValidInt(args);
 		assertNull(returnVal);
 		
 	}
 	
+	
+	//	Ensure that 5 drivers are simulated through each simulation
+	
+	//	Run a test simulation with seed 10
+	//	After the test is finsihed, get the count of the number of drivers
+	@Test
+	public void test5Drivers() {
+		String[] args = {"10"};
+		CitySim9004.main(args);
+		int numbDrivers = CitySim9004.getNumberOfDrivers();
+		assertEquals(5, numbDrivers);
+	}
 }
