@@ -98,6 +98,8 @@ public class DriverTest {
 	
 	//	Create a new driver variable, increment the counter 5 times, since 5 is greater than or 3, the method
 	//	should always return true.
+	
+	//	Tests FUN-SENNOTT-EDGES, checks the condition of whether or not to print the extra statement about needing more help
 	@Test
 	public void testCheckNumbVisitsGreaterThanThree() {
 		Driver d = new Driver(1, 3);
@@ -113,6 +115,8 @@ public class DriverTest {
 	
 	//	Create a new driver, incrememnt the counter 3 times, simulating that the driver has visited Sennott.
 	//	Check the results of the method call, which should always be true.
+	
+	//	Tests FUN-SENNOTT-EDGES, checks the condition of whether or not to print the extra statement about needing more help
 	@Test
 	public void testCheckNumbVisitsThree() {
 		Driver d = new Driver(1, 2);
@@ -128,6 +132,8 @@ public class DriverTest {
 	
 	//	Test a newly created driver that should have their number of visits initialized to 0.
 	//	Therefore the method should always return false, the number of visits is less than 3.
+	
+	//	Tests FUN-SENNOTT-EDGES, checks the condition of whether or not to print the extra statement about needing more help
 	@Test
 	public void testCheckNumbVisitsLessThanThreeZero() {
 		Driver d = new Driver(1, 2);
