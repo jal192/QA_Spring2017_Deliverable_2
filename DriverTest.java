@@ -93,7 +93,11 @@ public class DriverTest {
 	}
 	
 	
-	//
+	//	Ensure that if the user has visited Laboon more than three times that the method will return the correct
+	//	boolean value indicating to print out the driver needed help after the driver has left the city.
+	
+	//	Create a new driver variable, increment the counter 5 times, since 5 is greater than or 3, the method
+	//	should always return true.
 	@Test
 	public void testCheckNumbVisitsGreaterThanThree() {
 		Driver d = new Driver(1, 3);
@@ -104,7 +108,11 @@ public class DriverTest {
 	}
 	
 	
-	//
+	//	Test checks the edge case, ensuring that if the driver visited Laboon exactly three times that the 
+	//	method will always return true, indicating to print the message indicating that the driver needed a lot of help.
+	
+	//	Create a new driver, incrememnt the counter 3 times, simulating that the driver has visited Sennott.
+	//	Check the results of the method call, which should always be true.
 	@Test
 	public void testCheckNumbVisitsThree() {
 		Driver d = new Driver(1, 2);
@@ -117,14 +125,30 @@ public class DriverTest {
 	
 	//	Ensure that if the number of times the driver has visited Sennott is less than three that 
 	//	a flag indicating whether or not to print the corresponding message is false.
+	
+	//	Test a newly created driver that should have their number of visits initialized to 0.
+	//	Therefore the method should always return false, the number of visits is less than 3.
 	@Test
-	public void testCheckNumbVisitsLessThanThree() {
+	public void testCheckNumbVisitsLessThanThreeZero() {
 		Driver d = new Driver(1, 2);
+		assertFalse(d.checkNumbVisitsGreaterEqualThree());
+	}
+	
+	//	Ensure that if the number of times the driver has visited Sennott is less than three that 
+	//	a flag indicating whether or not to print the corresponding message is false.
+	
+	//	Tests a driver that has visited Laboon once. Since the number of visits is less than 3,
+	//	the method should always return false.
+	@Test
+	public void testCheckNumbVisitsLessThanThreeOne() {
+		Driver d = new Driver(1, 2);
+		d.incrementVisitCounter();
 		assertFalse(d.checkNumbVisitsGreaterEqualThree());
 	}
 	
 	
 	//	Check that Driver equals itself
+	//	 
 	@Test
 	public void testDriverEqualsSelf() {
 		Driver d = new Driver(2,3);
