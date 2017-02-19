@@ -157,7 +157,7 @@ public class LocationNodeListTest {
 	
 	//	Test print traversal by ave
 	//	Test traversal from Union to Outside City via Fourth Ave.
-	//	Test requirement FUN-AVENUES
+	//	Test requirement FUN-OTHER-CITIES
 	@Test
 	public void testTraversalByAvenueUnionToPhil() {
 		Driver mockDriver1 = Mockito.mock(Driver.class);
@@ -204,7 +204,7 @@ public class LocationNodeListTest {
 	
 	//	Test print traversal by ave
 	//	Test traversal from Sennott to Outside City via Fifth Ave.
-	//	Test requirement FUN-AVENUES
+	//	Test requirement FUN-OTHER-CITIES
 	@Test
 	public void testTraversalByAvenueSennottToClev() {
 		Driver mockDriver1 = Mockito.mock(Driver.class);
@@ -314,6 +314,7 @@ public class LocationNodeListTest {
 	
 	
 	//	Check driver start pos if the starting position is Sennott which is recognized by location ID 3
+	//	Tests part of FUN-SENNOTT-COUNT
 	@Test
 	public void testCheckStartPosSennott() {
 		LocationNodeList cityMap = new LocationNodeList();
@@ -328,6 +329,7 @@ public class LocationNodeListTest {
 	
 	
 	//	Check driver start pos if the starting position is Sennott
+	//	Tests part of FUN-SENNOTT-COUNT
 	@Test
 	public void testCheckStartPosNotSennott() {
 		LocationNodeList cityMap = new LocationNodeList();
@@ -344,6 +346,7 @@ public class LocationNodeListTest {
 	
 	//	Check if driver is at the end of the city
 	//	This test checks the condition that the driver is outside of the city
+	//	Tests part of requirement FUN-END
 	@Test
 	public void testCheckOutsideCityDriverOutsideCity() {
 		LocationNodeList cityMap = new LocationNodeList();
