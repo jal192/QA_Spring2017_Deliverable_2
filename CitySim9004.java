@@ -120,7 +120,7 @@ public class CitySim9004 {
 					} while(driverLeavesCity == false);
 					
 					//	Print out the number of times the driver has met with Laboon
-					System.out.println("Driver " + driver.getDriverID() + " met with Professor Laboon " + driver.getNumberSennottVisits() + " time(s).");
+					System.out.println(printNumbVists(driver));
 					
 					//	Check if the number of times the driver has visited Laboon is 3 or more
 					//	If so then print the statement indicating that the driver needed a lot of help
@@ -184,4 +184,8 @@ public class CitySim9004 {
 	}
 	
 	
+	//
+	public static String printNumbVists(Driver d) {
+		return "Driver " + d.getDriverID() + " met with Professor Laboon " + d.getNumberSennottVisits() + " time(s).";
+	}
 }
