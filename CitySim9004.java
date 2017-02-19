@@ -23,7 +23,7 @@ public class CitySim9004 {
 	private ArrayList<LocationNode> locationList;
 	private String outsideCityPhil;
 	private String outsideCityClev;
-	
+	private int numbDrivers;
 	
 	public static void main(String[] args) {
 		
@@ -55,13 +55,14 @@ public class CitySim9004 {
 				rng.setSeed(seed);
 				
 				//	Initialize all possible locations
-				LocationNodeList lList = new LocationNodeList();
-				lList.initializeLocations();
+				LocationNodeList cityMap = new LocationNodeList();
+				cityMap.initializeLocations();
 				
 				//	Retrieve the city map
 				locationList = new ArrayList<LocationNode>();
-				locationList = lList.getCityMap();
+				locationList = cityMap.getCityMap();
 				
+				numbDrivers = 0;
 				
 				for(int i = 1; i < 6; i++) {
 					
@@ -70,14 +71,8 @@ public class CitySim9004 {
 					int startPos = rng.nextInt(4) + 1;
 					Driver driver = new Driver(i, startPos);
 					
-					//System.out.println("Start: " + startPos);
-					
 					do {
-						
-						//	Check if the user is currently at Sennott, also takes care of case where user starts at Sennott
-						if(driver.getLocation() == 3) {
-							driver.incrementVisitCounter();
-						}
+						driver = cityMap.checkStartPos(driver);
 						
 						//	Get the current location node of the driver
 						LocationNode current = locationList.get(driver.getLocation()-1);
@@ -94,38 +89,19 @@ public class CitySim9004 {
 							int nextLocationID = current.getLocByAvenue();
 							driver.setNewLocation(nextLocationID);
 							
-							//System.out.println("LocationID " + nextLocationID);
-							
 							LocationNode endDestination = locationList.get(driver.getLocation()-1);
 							
-							if(nextLocationID != 5) {
-								System.out.println("Driver " + driver.getDriverID() + " heading from " + current.getLocationName() + " to " + 
-													endDestination.getLocationName() + " via " + current.getAvenueName());
-							}
-							else if(nextLocationID == 5) {
-								driverLeavesCity = true;
-								
-								System.out.println("Driver " + driver.getDriverID() + " heading from " + current.getLocationName() + " to " + 
-													endDestination.getLocationName() + " via " + current.getAvenueName());
-								
-								if(current.getLocationID() == 2) {
-									System.out.println("Driver " + driver.getDriverID() + " has gone to " + outsideCityPhil + "!");
-								}
-								else if(current.getLocationID() == 3) {
-									System.out.println("Driver " + driver.getDriverID() + " has gone to " + outsideCityClev + "!");
-								}
-							}
+							cityMap.printDriverTravelByAvenue(driver, current, endDestination);
+							
+							driverLeavesCity = cityMap.checkDriverExitCity(driver);
 						}
 						else if(selectPath == 2) {
 							int nextLocationID = current.getLocByStreet();
 							driver.setNewLocation(nextLocationID);
 							
-							//System.out.println("LocationID " + nextLocationID);
-							
 							LocationNode endDestination = locationList.get(driver.getLocation()-1);
 							
-							System.out.println("Driver " + driver.getDriverID() + " heading from " + current.getLocationName() + " to " + 
-												endDestination.getLocationName() + " via " + endDestination.getStreetName());
+							cityMap.printDriverTravelByStreet(driver, current, endDestination);
 						}
 						
 					} while(driverLeavesCity == false);
@@ -136,8 +112,9 @@ public class CitySim9004 {
 						System.out.println("Wow, that driver needed lots of CS help!");
 					}
 					
-					System.out.println("-----");
+					printDashes();
 					
+					numbDrivers++;
 				}
 			}
 			else {
@@ -178,6 +155,16 @@ public class CitySim9004 {
 		}
 		
 		return val;
+	}
+	
+	//	Print out the 5 dashes as stated in the FUN-DASHES requirement
+	public void printDashes() {
+		System.out.println("-----");
+	}
+	
+	
+	public int getNumberOfDrivers() {
+		return this.numbDrivers;
 	}
 	
 	
