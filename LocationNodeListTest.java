@@ -20,7 +20,11 @@ import java.io.*;
 public class LocationNodeListTest {
 
 	//	Ensure that the first four intialized locations are the ones required: Presby, Union, Sennott, Hillman
-	//	
+	//	This test satisfies the FUN-CITY-LOCS requirement
+	
+	//	Create a locations list, intialize all locations
+	//	Retrieve the map
+	//	Check that the first four locations are the ones specified in the requirements
 	@Test
 	public void testLocNamePresbyUnionSennottHillmanExists() {
 		
@@ -37,8 +41,12 @@ public class LocationNodeListTest {
 		assertEquals("Hillman", locList.get(3).getLocationName());
 	}
 	
-	//	Ensure that the last intialized city is outside city exists
-	//	
+	//	Ensure that the last intialized city is outside city 
+	//	This test satisfies the FUN-OUTSIDE-CITY requirement
+	
+	//	Create a location list, initialize all locations
+	//	Retrieve the city map
+	//	Check the last or 5th element in the arraylist that it's the outside city.
 	@Test
 	public void testLocNameOutsideCityExists() {
 		
@@ -54,6 +62,12 @@ public class LocationNodeListTest {
 	
 	//	Ensure that there are a total of 5 locations initialized
 	//	There should always be 5 locations in total that are intialized and set up
+	//	Based on the requirements there are four city locations and one location representing the outside city
+	//	Therefore there should be 5 in total
+	
+	//	Create a locations list, intialize all locations
+	//	Retrieve the map into an arraylist
+	//	Check that the size of the arraylist or number of locations initialized is 5
 	@Test
 	public void testInitializeLocations() {
 		
@@ -69,6 +83,15 @@ public class LocationNodeListTest {
 	
 	
 	//	Ensure that setting a new list overwrites the previous list
+	//	If a new list overs the old list, then when the list is retrieved it should be the new one
+	
+	//	Create a locations list object, which by default has an empty list
+	//	Create an arraylist and add mock location node objects because it doesn't matter
+	//	what information is contained in the location nodes, this test focuses on consistency
+	//	Add all mock objects to the temporary list
+	//	Set the new list 
+	//	Retrieve the list
+	//	Ensure that the retrieve list matches the one that set to it
 	@Test
 	public void testSetCityMap() {
 		LocationNodeList lList = new LocationNodeList();
@@ -92,6 +115,11 @@ public class LocationNodeListTest {
 	}
 	
 	//	Ensure that getting the list of location nodes is empty when a new list is initialized
+	//	When a new location list is created, the default list should always be empty
+	
+	//	Create a new locations list
+	//	Retrieve the city map
+	//	Check that the number of locations in the list is 0
 	@Test
 	public void testGetListEmpty() {
 		
@@ -102,6 +130,20 @@ public class LocationNodeListTest {
 		
 		assertEquals(0, getLocList.size());
 	}
+	
+	
+	//	Test print traversal by ave
+	
+	
+	//	Test print traversal by street
+	
+	
+	
+	//	Check driver start pos
+	
+	
+	
+	//	Check if driver is at the end of the city
 }
 
 
