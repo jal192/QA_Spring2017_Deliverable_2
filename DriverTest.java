@@ -147,8 +147,7 @@ public class DriverTest {
 	}
 	
 	
-	//	Check that Driver equals itself
-	//	 
+	//	Ensure that a Driver equals itself
 	@Test
 	public void testDriverEqualsSelf() {
 		Driver d = new Driver(2,3);
