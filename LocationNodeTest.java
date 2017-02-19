@@ -95,9 +95,9 @@ public class LocationNodeTest {
 	//	the avenue route. 
 	//	Check that the retrieve location ID is 0.
 	@Test
-	public void testGetLocByAvenueZero_B() {
+	public void testGetLocByAvenueNull_B() {
 		LocationNode testLoc = new LocationNode("Union", 1, "Fourth Avenue.", "Phil St.");
-		assertEquals(0, testLoc.getLocByAvenue());
+		assertNull(testLoc.getLocByAvenue());
 	}
 	
 	
@@ -108,9 +108,9 @@ public class LocationNodeTest {
 	//	the street route. 
 	//	Check that the retrieve location ID is 0.
 	@Test
-	public void testGetLocByStreetZero_B() {
+	public void testGetLocByStreetNull_B() {
 		LocationNode testLoc = new LocationNode("Union", 1, "Fourth Avenue.", "Phil St.");
-		assertEquals(0, testLoc.getLocByStreet());
+		assertNull(testLoc.getLocByStreet());
 	}
 	
 	
@@ -127,15 +127,13 @@ public class LocationNodeTest {
 	public void testSetLocByAvenue_B() {
 		
 		LocationNode StartLoc = new LocationNode("Union", 1, "Fourth Avenue.", "Phil St.");
-		LocationNode mockLocNodeAve = Mockito.mock(LocationNode.class);
+		LocationNode EndLoc = new LocationNode("Hillman", 4, "Fifth Avenue.", "Phil St.");
 		
-		Mockito.when(mockLocNodeAve.getLocByAvenue()).thenReturn(2);
+		StartLoc.setLocByAvenue(EndLoc);
 		
-		StartLoc.setLocByAvenue(mockLocNodeAve.getLocByAvenue());
+		LocationNode returnVal = StartLoc.getLocByAvenue();
 		
-		int returnVal = StartLoc.getLocByAvenue();
-		
-		assertEquals(returnVal, 2);
+		assertEquals(returnVal, EndLoc);
 	}
 	
 	
@@ -150,17 +148,15 @@ public class LocationNodeTest {
 	//	see if it matches the mock location node's id.
 	@Test
 	public void testSetLocByStreet_B() {
-
+		
 		LocationNode StartLoc = new LocationNode("Union", 1, "Fourth Avenue.", "Phil St.");
-		LocationNode mockLocNodeStreet = Mockito.mock(LocationNode.class);
+		LocationNode EndLoc = new LocationNode("Hillman", 4, "Fifth Avenue.", "Phil St.");
 		
-		Mockito.when(mockLocNodeStreet.getLocByStreet()).thenReturn(4);
+		StartLoc.setLocByStreet(EndLoc);
 		
-		StartLoc.setLocByStreet(mockLocNodeStreet.getLocByStreet());
+		LocationNode returnVal = StartLoc.getLocByStreet();
 		
-		int returnVal = StartLoc.getLocByStreet();
-		
-		assertEquals(returnVal, 4);
+		assertEquals(returnVal, EndLoc);
 	}
 	
 	
@@ -231,9 +227,9 @@ public class LocationNodeTest {
 	//	Ensure that the location ID is 0, which indicates that there is no location
 	//	when traveling by avenue.
 	@Test
-	public void testGetLocByAvenue_O() {
+	public void testGetLocByAvenueNull_O() {
 		LocationNode outsideCity = new LocationNode("Philadelphia", 5);
-		assertEquals(0, outsideCity.getLocByAvenue());
+		assertNull(outsideCity.getLocByAvenue());
 	}
 	
 	
@@ -245,9 +241,9 @@ public class LocationNodeTest {
 	//	Ensure that the location ID is 0, which indicates that there is no location
 	//	when traveling by street.
 	@Test
-	public void testGetLocByStreet_O() {
+	public void testGetLocByStreetNull_O() {
 		LocationNode outsideCity = new LocationNode("Philadelphia", 5);
-		assertEquals(0, outsideCity.getLocByStreet());
+		assertNull(outsideCity.getLocByStreet());
 	}
 	
 
