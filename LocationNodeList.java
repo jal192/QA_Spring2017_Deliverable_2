@@ -20,8 +20,8 @@ public class LocationNodeList {
 	public LocationNodeList() {
 		
 		lList = new ArrayList<LocationNode>();
-		
 	}
+	
 	
 	//	Initialize all 5 locations and set up the corresponding routes
 	public void initializeLocations() {
@@ -34,23 +34,23 @@ public class LocationNodeList {
 		LocationNode outsideCity = new LocationNode("Outside City", 5);
 		
 		//	Set up conections for Presby
-		presby.setLocByAvenue(2);
-		presby.setLocByStreet(3);
+		presby.setLocByAvenue(union);
+		presby.setLocByStreet(sennott);
 		
 		
 		//	Set up conections for Union
-		union.setLocByAvenue(5);
-		union.setLocByStreet(4);
+		union.setLocByAvenue(outsideCity);
+		union.setLocByStreet(hillman);
 		
 		
 		//	Set up conections for Sennott
-		sennott.setLocByAvenue(5);
-		sennott.setLocByStreet(1);
+		sennott.setLocByAvenue(outsideCity);
+		sennott.setLocByStreet(presby);
 		
 		
 		//	Set up conections for Hillman
-		hillman.setLocByAvenue(3);
-		hillman.setLocByStreet(2);
+		hillman.setLocByAvenue(sennott);
+		hillman.setLocByStreet(union);
 		
 		
 		//	Add all locations to list
@@ -61,10 +61,12 @@ public class LocationNodeList {
 		this.lList.add(outsideCity);
 	}
 	
+	
 	//	Set a new city list, primarily used in testing the getCityMap() method
 	public void setCityMap(ArrayList<LocationNode> newList) {
 		this.lList = newList;
 	}
+	
 	
 	//	Retrieve the current or initialized city map
 	public ArrayList<LocationNode> getCityMap() {
@@ -112,7 +114,7 @@ public class LocationNodeList {
 	//	Return the updated driver
 	public Driver checkStartPos(Driver d) {
 		//	Check if the user is currently at Sennott, also takes care of case where user starts at Sennott
-		int driverLoc = d.getLocation();
+		int driverLoc = d.getLocation().getLocationID();
 		
 		if(driverLoc == 3) {
 			d.incrementVisitCounter();
@@ -128,9 +130,9 @@ public class LocationNodeList {
 	public boolean checkDriverExitCity(Driver d) {
 		boolean driverLeavesCity = false;
 		
-		int driverLoc = d.getLocation();
+		LocationNode driverLoc = d.getLocation();
 		
-		if(driverLoc == 5) {
+		if(driverLoc.getLocationID() == 5) {
 			driverLeavesCity = true;
 		}
 		
