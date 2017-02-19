@@ -73,32 +73,38 @@ public class LocationNodeList {
 	
 	
 	//	Print route details when traveling by avenue
-	public void printDriverTravelByAvenue(Driver d, LocationNode start, LocationNode end) {
+	public String printDriverTravelByAvenue(Driver d, LocationNode start, LocationNode end) {
 		//	If the location ID of the driver is not 5 it means that the driver is still in the city
 		//	Else the location ID is 5, means that the driver has left the city
-		//	Print out the route taken by the driver and the intial and end destinations
+		//	return the print information about the route taken by the driver and the intial and end destinations
+		
+		String displayMessage = "";
+		
 		if(end.getLocationID() != 5) {
-			System.out.println("Driver " + d.getDriverID() + " heading from " + start.getLocationName() + " to " + 
-								end.getLocationName() + " via " + start.getAvenueName());
+			displayMessage = "Driver " + d.getDriverID() + " heading from " + start.getLocationName() + " to " + 
+								end.getLocationName() + " via " + start.getAvenueName();
 		}
 		else if(end.getLocationID() == 5) {
-			System.out.println("Driver " + d.getDriverID() + " heading from " + start.getLocationName() + " to " + 
-								end.getLocationName() + " via " + start.getAvenueName());
+			displayMessage = "Driver " + d.getDriverID() + " heading from " + start.getLocationName() + " to " + 
+								end.getLocationName() + " via " + start.getAvenueName();
 			
 			if(start.getLocationID() == 2) {
-				System.out.println("Driver " + d.getDriverID() + " has gone to " + outsideCityPhil + "!");
+				displayMessage = displayMessage + "\nDriver " + d.getDriverID() + " has gone to " + outsideCityPhil + "!";
 			}
 			else if(start.getLocationID() == 3) {
-				System.out.println("Driver " + d.getDriverID() + " has gone to " + outsideCityClev + "!");
+				displayMessage = displayMessage + "\nDriver " + d.getDriverID() + " has gone to " + outsideCityClev + "!";
 			}
 		}
+		
+		return displayMessage;
 	}
 	
 	
 	//	Print route details when traveling by street
-	public void printDriverTravelByStreet(Driver d, LocationNode start, LocationNode end) {
-		System.out.println("Driver " + d.getDriverID() + " heading from " + start.getLocationName() + " to " + 
-												end.getLocationName() + " via " + end.getStreetName());
+	public String printDriverTravelByStreet(Driver d, LocationNode start, LocationNode end) {
+		String displayMessage =  "Driver " + d.getDriverID() + " heading from " + start.getLocationName() + " to " + end.getLocationName() + " via " + start.getStreetName();
+												
+		return displayMessage;
 	}
 	
 	
@@ -106,7 +112,9 @@ public class LocationNodeList {
 	//	Return the updated driver
 	public Driver checkStartPos(Driver d) {
 		//	Check if the user is currently at Sennott, also takes care of case where user starts at Sennott
-		if(d.getLocation() == 3) {
+		int driverLoc = d.getLocation();
+		
+		if(driverLoc == 3) {
 			d.incrementVisitCounter();
 		}
 		
@@ -120,7 +128,9 @@ public class LocationNodeList {
 	public boolean checkDriverExitCity(Driver d) {
 		boolean driverLeavesCity = false;
 		
-		if(d.getLocation() == 5) {
+		int driverLoc = d.getLocation();
+		
+		if(driverLoc == 5) {
 			driverLeavesCity = true;
 		}
 		
