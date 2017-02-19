@@ -28,12 +28,12 @@ public class LocationNodeListTest {
 	@Test
 	public void testLocNamePresbyUnionSennottHillmanExists() {
 		
-		LocationNodeList lList = new LocationNodeList();
-		lList.initializeLocations();
+		LocationNodeList cityMap = new LocationNodeList();
+		cityMap.initializeLocations();
 		
 		ArrayList<LocationNode> locList = new ArrayList<LocationNode>();
 		
-		locList = lList.getCityMap();
+		locList = cityMap.getCityMap();
 		
 		assertEquals("Presby", locList.get(0).getLocationName());
 		assertEquals("Union", locList.get(1).getLocationName());
@@ -50,12 +50,12 @@ public class LocationNodeListTest {
 	@Test
 	public void testLocNameOutsideCityExists() {
 		
-		LocationNodeList lList = new LocationNodeList();
-		lList.initializeLocations();
+		LocationNodeList cityMap = new LocationNodeList();
+		cityMap.initializeLocations();
 		
 		ArrayList<LocationNode> locList = new ArrayList<LocationNode>();
 		
-		locList = lList.getCityMap();
+		locList = cityMap.getCityMap();
 		
 		assertEquals("Outside City", locList.get(4).getLocationName());
 	}
@@ -71,12 +71,12 @@ public class LocationNodeListTest {
 	@Test
 	public void testInitializeLocations() {
 		
-		LocationNodeList lList = new LocationNodeList();
-		lList.initializeLocations();
+		LocationNodeList cityMap = new LocationNodeList();
+		cityMap.initializeLocations();
 		
 		ArrayList<LocationNode> locList = new ArrayList<LocationNode>();
 		
-		locList = lList.getCityMap();
+		locList = cityMap.getCityMap();
 		
 		assertEquals(5, locList.size());
 	}
@@ -94,7 +94,7 @@ public class LocationNodeListTest {
 	//	Ensure that the retrieve list matches the one that set to it
 	@Test
 	public void testSetCityMap() {
-		LocationNodeList lList = new LocationNodeList();
+		LocationNodeList cityMap = new LocationNodeList();
 		
 		ArrayList<LocationNode> tempList = new ArrayList<LocationNode>();
 		
@@ -106,10 +106,10 @@ public class LocationNodeListTest {
 		tempList.add(mockLoc2);
 		tempList.add(mockLoc3);
 		
-		lList.setCityMap(tempList);
+		cityMap.setCityMap(tempList);
 		
 		ArrayList<LocationNode> getLocList = new ArrayList<LocationNode>();
-		getLocList = lList.getCityMap();
+		getLocList = cityMap.getCityMap();
 		
 		assertSame(tempList, getLocList);
 	}
@@ -123,27 +123,255 @@ public class LocationNodeListTest {
 	@Test
 	public void testGetListEmpty() {
 		
-		LocationNodeList lList = new LocationNodeList();
+		LocationNodeList cityMap = new LocationNodeList();
 		
 		ArrayList<LocationNode> getLocList = new ArrayList<LocationNode>();
-		getLocList = lList.getCityMap();
+		getLocList = cityMap.getCityMap();
 		
 		assertEquals(0, getLocList.size());
 	}
 	
 	
 	//	Test print traversal by ave
+	//	Test traversal from Presby to Union via Fourth Ave.
+	//	Test requirement FUN-AVENUES
+	@Test
+	public void testTraversalByAvenuePresbyToUnion() {
+		Driver mockDriver1 = Mockito.mock(Driver.class);
+		LocationNode mockLoc1 = Mockito.mock(LocationNode.class);
+		LocationNode mockLoc2 = Mockito.mock(LocationNode.class);
+		
+		Mockito.when(mockDriver1.getDriverID()).thenReturn(3);
+		Mockito.when(mockLoc1.getLocationName()).thenReturn("Presby");
+		Mockito.when(mockLoc1.getAvenueName()).thenReturn("Fourth Ave.");
+		Mockito.when(mockLoc2.getLocationName()).thenReturn("Union");
+		Mockito.when(mockLoc2.getLocationID()).thenReturn(2);
+		
+		LocationNodeList cityMap = new LocationNodeList();
+		
+		String returnString = cityMap.printDriverTravelByAvenue(mockDriver1, mockLoc1, mockLoc2);
+		String expectedOutput = "Driver 3 heading from Presby to Union via Fourth Ave.";
+		assertEquals(expectedOutput, returnString);
+	}
+	
+	
+	//	Test print traversal by ave
+	//	Test traversal from Union to Outside City via Fourth Ave.
+	//	Test requirement FUN-AVENUES
+	@Test
+	public void testTraversalByAvenueUnionToPhil() {
+		Driver mockDriver1 = Mockito.mock(Driver.class);
+		LocationNode mockLoc1 = Mockito.mock(LocationNode.class);
+		LocationNode mockLoc2 = Mockito.mock(LocationNode.class);
+		
+		Mockito.when(mockDriver1.getDriverID()).thenReturn(3);
+		Mockito.when(mockLoc1.getLocationName()).thenReturn("Union");
+		Mockito.when(mockLoc1.getAvenueName()).thenReturn("Fourth Ave.");
+		Mockito.when(mockLoc1.getLocationID()).thenReturn(2);
+		Mockito.when(mockLoc2.getLocationName()).thenReturn("Outside City");
+		Mockito.when(mockLoc2.getLocationID()).thenReturn(5);
+		
+		LocationNodeList cityMap = new LocationNodeList();
+		
+		String returnString = cityMap.printDriverTravelByAvenue(mockDriver1, mockLoc1, mockLoc2);
+		String expectedOutput = "Driver 3 heading from Union to Outside City via Fourth Ave.\nDriver 3 has gone to Philadelphia!";
+		assertEquals(expectedOutput, returnString);
+	}
+	
+	
+	//	Test print traversal by ave
+	//	Test traversal from Hillman to Sennott via Fifth Ave.
+	//	Test requirement FUN-AVENUES
+	@Test
+	public void testTraversalByAvenueHillmanToSennott() {
+		Driver mockDriver1 = Mockito.mock(Driver.class);
+		LocationNode mockLoc1 = Mockito.mock(LocationNode.class);
+		LocationNode mockLoc2 = Mockito.mock(LocationNode.class);
+		
+		Mockito.when(mockDriver1.getDriverID()).thenReturn(3);
+		Mockito.when(mockLoc1.getLocationName()).thenReturn("Hillman");
+		Mockito.when(mockLoc1.getAvenueName()).thenReturn("Fifth Ave.");
+		Mockito.when(mockLoc2.getLocationName()).thenReturn("Sennott");
+		Mockito.when(mockLoc2.getLocationID()).thenReturn(3);
+		
+		LocationNodeList cityMap = new LocationNodeList();
+		
+		String returnString = cityMap.printDriverTravelByAvenue(mockDriver1, mockLoc1, mockLoc2);
+		String expectedOutput = "Driver 3 heading from Hillman to Sennott via Fifth Ave.";
+		assertEquals(expectedOutput, returnString);
+	}
+	
+	
+	//	Test print traversal by ave
+	//	Test traversal from Sennott to Outside City via Fifth Ave.
+	//	Test requirement FUN-AVENUES
+	@Test
+	public void testTraversalByAvenueSennottToClev() {
+		Driver mockDriver1 = Mockito.mock(Driver.class);
+		LocationNode mockLoc1 = Mockito.mock(LocationNode.class);
+		LocationNode mockLoc2 = Mockito.mock(LocationNode.class);
+		
+		Mockito.when(mockDriver1.getDriverID()).thenReturn(3);
+		Mockito.when(mockLoc1.getLocationName()).thenReturn("Sennott");
+		Mockito.when(mockLoc1.getAvenueName()).thenReturn("Fifth Ave.");
+		Mockito.when(mockLoc1.getLocationID()).thenReturn(3);
+		Mockito.when(mockLoc2.getLocationName()).thenReturn("Outside City");
+		Mockito.when(mockLoc2.getLocationID()).thenReturn(5);
+		
+		LocationNodeList cityMap = new LocationNodeList();
+		
+		String returnString = cityMap.printDriverTravelByAvenue(mockDriver1, mockLoc1, mockLoc2);
+		String expectedOutput = "Driver 3 heading from Sennott to Outside City via Fifth Ave.\nDriver 3 has gone to Cleveland!";
+		assertEquals(expectedOutput, returnString);
+	}
+	
+	//	Test print traversal by street
+	//	Test traversal from Sennott to Presby via Bill St.
+	//	Test requirement FUN-STREETS
+	@Test
+	public void testTraversalByStreetSennottToPresby() {
+		Driver mockDriver1 = Mockito.mock(Driver.class);
+		LocationNode mockLoc1 = Mockito.mock(LocationNode.class);
+		LocationNode mockLoc2 = Mockito.mock(LocationNode.class);
+		
+		Mockito.when(mockDriver1.getDriverID()).thenReturn(1);
+		Mockito.when(mockLoc1.getLocationName()).thenReturn("Sennott");
+		Mockito.when(mockLoc2.getLocationName()).thenReturn("Presby");
+		Mockito.when(mockLoc1.getStreetName()).thenReturn("Bill St.");
+		
+		LocationNodeList cityMap = new LocationNodeList();
+		
+		String returnString = cityMap.printDriverTravelByStreet(mockDriver1, mockLoc1, mockLoc2);
+		String expectedOutput = "Driver 1 heading from Sennott to Presby via Bill St.";
+		assertEquals(expectedOutput, returnString);
+	}
 	
 	
 	//	Test print traversal by street
+	//	Test traversal from Presby to Sennott via Bill St.
+	//	Test requirement FUN-STREETS
+	@Test
+	public void testTraversalByStreetPresbyToSennott() {
+		Driver mockDriver1 = Mockito.mock(Driver.class);
+		LocationNode mockLoc1 = Mockito.mock(LocationNode.class);
+		LocationNode mockLoc2 = Mockito.mock(LocationNode.class);
+		
+		Mockito.when(mockDriver1.getDriverID()).thenReturn(1);
+		Mockito.when(mockLoc1.getLocationName()).thenReturn("Presby");
+		Mockito.when(mockLoc2.getLocationName()).thenReturn("Sennott");
+		Mockito.when(mockLoc1.getStreetName()).thenReturn("Bill St.");
+		
+		LocationNodeList cityMap = new LocationNodeList();
+		
+		String returnString = cityMap.printDriverTravelByStreet(mockDriver1, mockLoc1, mockLoc2);
+		String expectedOutput = "Driver 1 heading from Presby to Sennott via Bill St.";
+		assertEquals(expectedOutput, returnString);
+	}
 	
 	
+	//	Test print traversal by street
+	//	Test traversal from Presby to Sennott via Bill St.
+	//	Test requirement FUN-STREETS
+	@Test
+	public void testTraversalByStreetUnionToHillman() {
+		Driver mockDriver1 = Mockito.mock(Driver.class);
+		LocationNode mockLoc1 = Mockito.mock(LocationNode.class);
+		LocationNode mockLoc2 = Mockito.mock(LocationNode.class);
+		
+		Mockito.when(mockDriver1.getDriverID()).thenReturn(1);
+		Mockito.when(mockLoc1.getLocationName()).thenReturn("Union");
+		Mockito.when(mockLoc2.getLocationName()).thenReturn("Hillman");
+		Mockito.when(mockLoc1.getStreetName()).thenReturn("Phil St.");
+		
+		LocationNodeList cityMap = new LocationNodeList();
+		
+		String returnString = cityMap.printDriverTravelByStreet(mockDriver1, mockLoc1, mockLoc2);
+		String expectedOutput = "Driver 1 heading from Union to Hillman via Phil St.";
+		assertEquals(expectedOutput, returnString);
+	}
 	
-	//	Check driver start pos
 	
+	//	Test print traversal by street
+	//	Test traversal from Presby to Sennott via Bill St.
+	//	Test requirement FUN-STREETS
+	@Test
+	public void testTraversalByStreetHillmanToUnion() {
+		Driver mockDriver1 = Mockito.mock(Driver.class);
+		LocationNode mockLoc1 = Mockito.mock(LocationNode.class);
+		LocationNode mockLoc2 = Mockito.mock(LocationNode.class);
+		
+		Mockito.when(mockDriver1.getDriverID()).thenReturn(1);
+		Mockito.when(mockLoc1.getLocationName()).thenReturn("Hillman");
+		Mockito.when(mockLoc2.getLocationName()).thenReturn("Union");
+		Mockito.when(mockLoc1.getStreetName()).thenReturn("Phil St.");
+		
+		LocationNodeList cityMap = new LocationNodeList();
+		
+		String returnString = cityMap.printDriverTravelByStreet(mockDriver1, mockLoc1, mockLoc2);
+		String expectedOutput = "Driver 1 heading from Hillman to Union via Phil St.";
+		assertEquals(expectedOutput, returnString);
+	}
+	
+	
+	//	Check driver start pos if the starting position is Sennott which is recognized by location ID 3
+	@Test
+	public void testCheckStartPosSennott() {
+		LocationNodeList cityMap = new LocationNodeList();
+		
+		Driver testDriver = new Driver(1, 3);
+		testDriver.setNewLocation(3);
+		
+		Driver returnDriver = cityMap.checkStartPos(testDriver);
+		
+		assertEquals(1, returnDriver.getNumberSennottVisits());
+	}
+	
+	
+	//	Check driver start pos if the starting position is Sennott
+	@Test
+	public void testCheckStartPosNotSennott() {
+		LocationNodeList cityMap = new LocationNodeList();
+		
+		Driver mockDriver = Mockito.mock(Driver.class);
+		
+		Mockito.when(mockDriver.getLocation()).thenReturn(1);
+		
+		Driver returnDriver = cityMap.checkStartPos(mockDriver);
+		
+		assertEquals(0, returnDriver.getNumberSennottVisits());
+	}
 	
 	
 	//	Check if driver is at the end of the city
+	//	This test checks the condition that the driver is outside of the city
+	@Test
+	public void testCheckOutsideCityDriverOutsideCity() {
+		LocationNodeList cityMap = new LocationNodeList();
+		
+		Driver mockDriver = Mockito.mock(Driver.class);
+		
+		Mockito.when(mockDriver.getLocation()).thenReturn(5);
+		
+		boolean returnVal = cityMap.checkDriverExitCity(mockDriver);
+		
+		assertTrue(returnVal);
+	}
+	
+	
+	//	Check if driver is at the end of the city
+	//	This test checks the condition that the driver is still in the city
+	@Test
+	public void testCheckOutsideCityDriverInsideCity() {
+		LocationNodeList cityMap = new LocationNodeList();
+		
+		Driver mockDriver = Mockito.mock(Driver.class);
+		
+		Mockito.when(mockDriver.getLocation()).thenReturn(2);
+		
+		boolean returnVal = cityMap.checkDriverExitCity(mockDriver);
+		
+		assertFalse(returnVal);
+	}
 }
 
 
