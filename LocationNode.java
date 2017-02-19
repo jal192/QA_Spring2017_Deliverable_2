@@ -14,8 +14,8 @@
 public class LocationNode {
 	
 	private String locationName;
-	private int nextLocByAvenue;
-	private int nextLocByStreet;
+	private LocationNode nextLocByAvenue;
+	private LocationNode nextLocByStreet;
 	private String avenueName;
 	private String streetName;
 	private int locationID;
@@ -26,8 +26,8 @@ public class LocationNode {
 		this.locationName = name;
 		this.locationID = id;
 		
-		this.nextLocByAvenue = 0;
-		this.nextLocByStreet = 0;
+		this.nextLocByAvenue = null;
+		this.nextLocByStreet = null;
 		this.avenueName = null;
 		this.streetName = null;
 	}
@@ -40,8 +40,8 @@ public class LocationNode {
 		this.avenueName = aveName;
 		this.streetName = stName;
 		
-		this.nextLocByAvenue = 0;
-		this.nextLocByStreet = 0;
+		this.nextLocByAvenue = null;
+		this.nextLocByStreet = null;
 	}
 	
 	//	Retrieve location name
@@ -65,22 +65,22 @@ public class LocationNode {
 	}
 	
 	//	Set location node travelled by avenue
-	public void setLocByAvenue(int nextLoc) {
+	public void setLocByAvenue(LocationNode nextLoc) {
 		this.nextLocByAvenue = nextLoc;
 	}
 	
 	//	Set location node travelled by street
-	public void setLocByStreet(int nextLoc) {
+	public void setLocByStreet(LocationNode nextLoc) {
 		this.nextLocByStreet = nextLoc;
 	}
 	
 	//	Retrieve location node travelled by avenue
-	public int getLocByAvenue() {
+	public LocationNode getLocByAvenue() {
 		return this.nextLocByAvenue;
 	}
 	
 	//	Retrieve location node travelled by street
-	public int getLocByStreet() {
+	public LocationNode getLocByStreet() {
 		return this.nextLocByStreet;
 	}
 
