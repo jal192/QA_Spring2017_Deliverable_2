@@ -17,23 +17,19 @@ import java.io.*;
 public class CitySim9004 {
 
 
-	private boolean valid;
-	private Integer seed;
-	private ArrayList<Driver> driverList;
-	private ArrayList<LocationNode> locationList;
-	private String outsideCityPhil;
-	private String outsideCityClev;
-	private int numbDrivers;
+	private static boolean valid;
+	private static Integer seed;
+	private static ArrayList<Driver> driverList;
+	private static ArrayList<LocationNode> locationList;
+	private static String outsideCityPhil;
+	private static String outsideCityClev;
+	private static int numbDrivers;
+	private static boolean driverLeavesCity;
+	private static int startPos;
+	private static int nextLocationID;
+	private static int selectPath;
 	
 	public static void main(String[] args) {
-		
-		CitySim9004 sim = new CitySim9004(args);
-		
-	}
-	
-	
-	//
-	public CitySim9004(String[] args) {
 		
 		outsideCityPhil = "Philadelphia";
 		outsideCityClev = "Cleveland";
@@ -62,65 +58,89 @@ public class CitySim9004 {
 				locationList = new ArrayList<LocationNode>();
 				locationList = cityMap.getCityMap();
 				
+				//	Intialize counter that keeps track of the number of drivers
 				numbDrivers = 0;
 				
 				for(int i = 1; i < 6; i++) {
 					
-					boolean driverLeavesCity = false;
+					//	Intialize boolean variable that keeps track of whether or not the driver has left the city
+					driverLeavesCity = false;
 					
-					int startPos = rng.nextInt(4) + 1;
+					//	Retrieve the starting position from the random number generator
+					startPos = rng.nextInt(4) + 1;
+					
+					//	Set the random starting location as the current location of the driver
 					Driver driver = new Driver(i, startPos);
 					
+					//	Keep looping through simulation steps until the driver has left the city
 					do {
+						//	Check if the starting position of the driver is at Sennott
+						//	If so then increment the counter that keeps track of the number of visits
 						driver = cityMap.checkStartPos(driver);
 						
 						//	Get the current location node of the driver
 						LocationNode current = locationList.get(driver.getLocation()-1);
 						
-						int nextLocation = 0;
-						
 						//	1 represents avenue
 						//	2 represents street
-						int selectPath = rng.nextInt(2) + 1;
+						selectPath = rng.nextInt(2) + 1;
 						
-						//System.out.println(selectPath);
-						
+						//	If the random value obtained is 1, means that the driver follows the avenue route
 						if(selectPath == 1) {
-							int nextLocationID = current.getLocByAvenue();
+							//	Get the location ID corresponding to the next destination when traveling by avenue
+							nextLocationID = current.getLocByAvenue();
+							
+							//	Update the driver's location with the next location ID
 							driver.setNewLocation(nextLocationID);
 							
+							//	Retrieve the location node of the destination that the driver is currently at/travelled to
 							LocationNode endDestination = locationList.get(driver.getLocation()-1);
 							
+							//	Print out the details related to travel
 							cityMap.printDriverTravelByAvenue(driver, current, endDestination);
 							
+							//	Check if the driver has left the city, if so print the corresponding information
 							driverLeavesCity = cityMap.checkDriverExitCity(driver);
 						}
+						//	If the random value obtained is 2, means that the driver follows the street route
 						else if(selectPath == 2) {
-							int nextLocationID = current.getLocByStreet();
+							//	Get the location ID corresponding to the next destination when traveling by street
+							nextLocationID = current.getLocByStreet();
+							
+							//	Update the driver's location with the next location ID
 							driver.setNewLocation(nextLocationID);
 							
+							//	Retrieve the location node of the destination that the driver is currently at/travelled to
 							LocationNode endDestination = locationList.get(driver.getLocation()-1);
 							
+							//	Print out the details related to travel
 							cityMap.printDriverTravelByStreet(driver, current, endDestination);
 						}
 						
 					} while(driverLeavesCity == false);
 					
+					//	Print out the number of times the driver has met with Laboon
 					System.out.println("Driver " + driver.getDriverID() + " met with Professor Laboon " + driver.getNumberSennottVisits() + " time(s).");
-
+					
+					//	Check if the number of times the driver has visited Laboon is 3 or more
+					//	If so then print the statement indicating that the driver needed a lot of help
 					if(driver.checkNumbVisitsGreaterEqualThree() == true) {
 						System.out.println("Wow, that driver needed lots of CS help!");
 					}
 					
-					printDashes();
+					//	Display the 5 dashes after each run as stated in the FUN-DASHES requirement
+					System.out.println("-----");
 					
+					//	Since the current driver has finished his traversal through the city, increment the counter by 1
 					numbDrivers++;
 				}
 			}
+			//	If the inputted seed was not a valid integer display corresponding message
 			else {
 				System.out.println("Error: Seed input is not a valid integer.");
 			}
 		}
+		//	If the user entered too few or many arguments display the corresponding messages to the user
 		else {
 			System.out.println("Too Many or Zero Arguments Found!");
 			System.out.println("Proper Usage is: java CitySim9004 <Seed Integer>");
@@ -128,8 +148,8 @@ public class CitySim9004 {
 	}
 	
 	
-	//
-	public boolean checkNumbArgs(String[] a) {
+	//	Checks if the number of arguments is 1
+	public static boolean checkNumbArgs(String[] a) {
 		
 		boolean check = false;
 		
@@ -142,8 +162,8 @@ public class CitySim9004 {
 	}
 	
 	
-	//
-	public Integer checkValidInt(String[] a) {
+	//	Check if the argument/seed value that the user entered is an integer
+	public static Integer checkValidInt(String[] a) {
 		String seedString = a[0];
 		
 		Integer val = null;
@@ -157,14 +177,10 @@ public class CitySim9004 {
 		return val;
 	}
 	
-	//	Print out the 5 dashes as stated in the FUN-DASHES requirement
-	public void printDashes() {
-		System.out.println("-----");
-	}
-	
-	
-	public int getNumberOfDrivers() {
-		return this.numbDrivers;
+	//	Return the number of drivers
+	//	Primarily used for testing to determine number of simulations that are done
+	public static int getNumberOfDrivers() {
+		return numbDrivers;
 	}
 	
 	
