@@ -136,6 +136,8 @@ public class CitySim9004Test {
 	
 	//	Run a test simulation with seed 10
 	//	After the test is finsihed, get the count of the number of drivers
+	
+	//	Tests FUN-FIVE-DRIVERS
 	@Test
 	public void test5Drivers() {
 		String[] args = {"10"};
@@ -143,4 +145,20 @@ public class CitySim9004Test {
 		int numbDrivers = CitySim9004.getNumberOfDrivers();
 		assertEquals(5, numbDrivers);
 	}
+	
+	
+	//	Ensure that the number of times a driver has visited Laboon is printed out to the user
+	
+	//	Tests part of FUN-SENNOTT-COUNT
+	@Test
+	public void testPrintNumbVists() {
+		Driver mockDriver = Mockito.mock(Driver.class);
+		Mockito.when(mockDriver.getDriverID()).thenReturn(5);
+		Mockito.when(mockDriver.getNumberSennottVisits()).thenReturn(10);
+		
+		String returnVal = CitySim9004.printNumbVists(mockDriver);
+		String expectedOutput = "Driver 5 met with Professor Laboon 10 time(s).";
+		assertEquals(expectedOutput, returnVal);
+	}
+	
 }
