@@ -12,10 +12,10 @@
 public class Driver {
 	
 	private int driverID;
-	private int location;
+	private LocationNode location;
 	private int numberVisitsSennott;
 	
-	public Driver(int dID, int loc) {
+	public Driver(int dID, LocationNode loc) {
 		this.driverID = dID;
 		this.location = loc;
 		this.numberVisitsSennott = 0;
@@ -27,12 +27,12 @@ public class Driver {
 	}
 	
 	//	Return the current location id of the driver
-	public int getLocation() {
+	public LocationNode getLocation() {
 		return this.location;
 	}
 	
 	//	Set the new location of the driver
-	public void setNewLocation(int newLoc) {
+	public void setNewLocation(LocationNode newLoc) {
 		this.location = newLoc;
 	}
 	
