@@ -60,6 +60,7 @@ public class LocationNodeListTest {
 		assertEquals("Outside City", locList.get(4).getLocationName());
 	}
 	
+	
 	//	Ensure that there are a total of 5 locations initialized
 	//	There should always be 5 locations in total that are intialized and set up
 	//	Based on the requirements there are four city locations and one location representing the outside city
@@ -92,8 +93,10 @@ public class LocationNodeListTest {
 	//	Set the new list 
 	//	Retrieve the list
 	//	Ensure that the retrieve list matches the one that set to it
+	
+	//	Test uses test doubles/mocks
 	@Test
-	public void testSetCityMap() {
+	public void testSetCityMapMockNodes() {
 		LocationNodeList cityMap = new LocationNodeList();
 		
 		ArrayList<LocationNode> tempList = new ArrayList<LocationNode>();
@@ -319,8 +322,12 @@ public class LocationNodeListTest {
 	public void testCheckStartPosSennott() {
 		LocationNodeList cityMap = new LocationNodeList();
 		
-		Driver testDriver = new Driver(1, 3);
-		testDriver.setNewLocation(3);
+		LocationNode mockLoc = Mockito.mock(LocationNode.class);
+		Driver testDriver = new Driver(1, mockLoc);
+		
+		testDriver.setNewLocation(mockLoc);
+		
+		Mockito.when(mockLoc.getLocationID()).thenReturn(3);
 		
 		Driver returnDriver = cityMap.checkStartPos(testDriver);
 		
@@ -335,8 +342,11 @@ public class LocationNodeListTest {
 		LocationNodeList cityMap = new LocationNodeList();
 		
 		Driver mockDriver = Mockito.mock(Driver.class);
+		LocationNode mockLoc = Mockito.mock(LocationNode.class);
 		
-		Mockito.when(mockDriver.getLocation()).thenReturn(1);
+		Mockito.when(mockLoc.getLocationID()).thenReturn(1);
+		
+		Mockito.when(mockDriver.getLocation()).thenReturn(mockLoc);
 		
 		Driver returnDriver = cityMap.checkStartPos(mockDriver);
 		
@@ -352,8 +362,10 @@ public class LocationNodeListTest {
 		LocationNodeList cityMap = new LocationNodeList();
 		
 		Driver mockDriver = Mockito.mock(Driver.class);
+		LocationNode mockLoc = Mockito.mock(LocationNode.class);
 		
-		Mockito.when(mockDriver.getLocation()).thenReturn(5);
+		Mockito.when(mockDriver.getLocation()).thenReturn(mockLoc);
+		Mockito.when(mockLoc.getLocationID()).thenReturn(5);
 		
 		boolean returnVal = cityMap.checkDriverExitCity(mockDriver);
 		
@@ -364,12 +376,14 @@ public class LocationNodeListTest {
 	//	Check if driver is at the end of the city
 	//	This test checks the condition that the driver is still in the city
 	@Test
-	public void testCheckOutsideCityDriverInsideCity() {
+	public void testCheckOutsideCityDriverInsideCity() {		
 		LocationNodeList cityMap = new LocationNodeList();
 		
 		Driver mockDriver = Mockito.mock(Driver.class);
+		LocationNode mockLoc = Mockito.mock(LocationNode.class);
 		
-		Mockito.when(mockDriver.getLocation()).thenReturn(2);
+		Mockito.when(mockDriver.getLocation()).thenReturn(mockLoc);
+		Mockito.when(mockLoc.getLocationID()).thenReturn(2);
 		
 		boolean returnVal = cityMap.checkDriverExitCity(mockDriver);
 		
