@@ -20,8 +20,9 @@ public class DriverTest {
 	//	Then check if the retrieved value is the same as the one it was initialized with
 	@Test
 	public void testGetDriverLocation() {
-		Driver d = new Driver(1, 3);
-		assertEquals(3, d.getLocation());
+		LocationNode mockLoc = Mockito.mock(LocationNode.class);
+		Driver d = new Driver(1, mockLoc);
+		assertEquals(mockLoc, d.getLocation());
 	}
 	
 	
@@ -32,9 +33,11 @@ public class DriverTest {
 	//	Test if the new location of the driver matches the intended new location which in this case is 10
 	@Test
 	public void testSetDriverLocation() {
-		Driver d = new Driver(1, 3);
-		d.setNewLocation(10);
-		assertEquals(10, d.getLocation());
+		LocationNode mockLoc1 = Mockito.mock(LocationNode.class);
+		LocationNode mockLoc2 = Mockito.mock(LocationNode.class);
+		Driver d = new Driver(1, mockLoc1);
+		d.setNewLocation(mockLoc2);
+		assertEquals(mockLoc2, d.getLocation());
 	}
 	
 	
@@ -45,7 +48,8 @@ public class DriverTest {
 	//	Test if the current driver id matches the one initialized which in this case is 1
 	@Test
 	public void testGetDriverID() {
-		Driver d = new Driver(1, 3);
+		LocationNode mockLoc = Mockito.mock(LocationNode.class);
+		Driver d = new Driver(1, mockLoc);
 		assertEquals(1, d.getDriverID());
 	}
 	
@@ -58,7 +62,8 @@ public class DriverTest {
 	//	Retrieve the current number of times the driver has visited Sennott which should always be 0
 	@Test
 	public void testGetCurrentNumberSennottVisits() {
-		Driver d = new Driver(5, 2);
+		LocationNode mockLoc = Mockito.mock(LocationNode.class);
+		Driver d = new Driver(1, mockLoc);
 		assertEquals(0, d.getNumberSennottVisits());
 	}
 	
@@ -71,7 +76,8 @@ public class DriverTest {
 	//	Resulting total number of visits should always be 1
 	@Test
 	public void testIncrementNumberSennottVisits() {
-		Driver d = new Driver(1, 3);
+		LocationNode mockLoc = Mockito.mock(LocationNode.class);
+		Driver d = new Driver(1, mockLoc);
 		d.incrementVisitCounter();
 		assertEquals(1, d.getNumberSennottVisits());
 	}
@@ -85,7 +91,8 @@ public class DriverTest {
 	//	Resulting total number of visits should alwaus be 5
 	@Test
 	public void testMultipleVisits() {
-		Driver d = new Driver(1, 3);
+		LocationNode mockLoc = Mockito.mock(LocationNode.class);
+		Driver d = new Driver(1, mockLoc);
 		for(int i = 0; i < 5; i++) {
 			d.incrementVisitCounter();
 		}
@@ -102,7 +109,8 @@ public class DriverTest {
 	//	Tests FUN-SENNOTT-EDGES, checks the condition of whether or not to print the extra statement about needing more help
 	@Test
 	public void testCheckNumbVisitsGreaterThanThree() {
-		Driver d = new Driver(1, 3);
+		LocationNode mockLoc = Mockito.mock(LocationNode.class);
+		Driver d = new Driver(1, mockLoc);
 		for(int i = 0; i < 5; i++) {
 			d.incrementVisitCounter();
 		}
@@ -119,7 +127,8 @@ public class DriverTest {
 	//	Tests FUN-SENNOTT-EDGES, checks the condition of whether or not to print the extra statement about needing more help
 	@Test
 	public void testCheckNumbVisitsThree() {
-		Driver d = new Driver(1, 2);
+		LocationNode mockLoc = Mockito.mock(LocationNode.class);
+		Driver d = new Driver(1, mockLoc);
 		for(int i = 0; i < 3; i++) {
 			d.incrementVisitCounter();
 		}
@@ -136,7 +145,8 @@ public class DriverTest {
 	//	Tests FUN-SENNOTT-EDGES, checks the condition of whether or not to print the extra statement about needing more help
 	@Test
 	public void testCheckNumbVisitsLessThanThreeZero() {
-		Driver d = new Driver(1, 2);
+		LocationNode mockLoc = Mockito.mock(LocationNode.class);
+		Driver d = new Driver(1, mockLoc);
 		assertFalse(d.checkNumbVisitsGreaterEqualThree());
 	}
 	
@@ -147,7 +157,8 @@ public class DriverTest {
 	//	the method should always return false.
 	@Test
 	public void testCheckNumbVisitsLessThanThreeOne() {
-		Driver d = new Driver(1, 2);
+		LocationNode mockLoc = Mockito.mock(LocationNode.class);
+		Driver d = new Driver(1, mockLoc);
 		d.incrementVisitCounter();
 		assertFalse(d.checkNumbVisitsGreaterEqualThree());
 	}
@@ -156,7 +167,8 @@ public class DriverTest {
 	//	Ensure that a Driver equals itself
 	@Test
 	public void testDriverEqualsSelf() {
-		Driver d = new Driver(2,3);
+		LocationNode mockLoc = Mockito.mock(LocationNode.class);
+		Driver d = new Driver(1, mockLoc);
 		assertEquals(d,d);
 	}
 }
