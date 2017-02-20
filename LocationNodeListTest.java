@@ -4,10 +4,21 @@
 	cs1632
 	Deliverable 2
 	
-	#########################################
-	####### TODO Need to add comments #######
-	#########################################
-	
+	List of tests that use stubbing of methods (for ease of searching):
+		- testTraversalByAvenuePresbyToUnion
+		- testTraversalByAvenueUnionToPhil
+		- testTraversalByAvenueHillmanToSennott
+		- testTraversalByAvenueSennottToClev
+		- testTraversalByStreetSennottToPresby
+		- testTraversalByStreetPresbyToSennott
+		- testTraversalByStreetUnionToHillman
+		- testTraversalByStreetHillmanToUnion
+		- testCheckStartPosSennott
+		- testCheckStartPosNotSennott
+		- testCheckOutsideCityDriverOutsideCity
+		- testCheckOutsideCityDriverInsideCity
+		
+	Number of Tests: 17
 */
 
 import org.junit.Test;
@@ -18,13 +29,20 @@ import java.util.*;
 import java.io.*;
 
 public class LocationNodeListTest {
+	
+	
+	//	############################################################
+	//	########### 	TEST INTIALIZED LOCATION NAMES	 ###########
+	//	############################################################
+	
 
-	//	Ensure that the first four intialized locations are the ones required: Presby, Union, Sennott, Hillman
+	//	Ensure that the first four intialized locations are the ones required: Presby, Union, Sennott, Hillman.
+	//	The four locations inside the city should match the ones stated in the requirements.
 	//	This test satisfies the FUN-CITY-LOCS requirement
 	
-	//	Create a locations list, intialize all locations
-	//	Retrieve the map
-	//	Check that the first four locations are the ones specified in the requirements
+	//	Create a locations list, intialize all locations.
+	//	Retrieve the map.
+	//	Check that the first four locations are the ones specified in the requirements.
 	@Test
 	public void testLocNamePresbyUnionSennottHillmanExists() {
 		
@@ -41,11 +59,13 @@ public class LocationNodeListTest {
 		assertEquals("Hillman", locList.get(3).getLocationName());
 	}
 	
-	//	Ensure that the last intialized city is outside city 
-	//	This test satisfies the FUN-OUTSIDE-CITY requirement
 	
-	//	Create a location list, initialize all locations
-	//	Retrieve the city map
+	//	Ensure that the last intialized city is the outside city. 
+	//	The last locations on the map should be represented by an outside city as stated in the requirements.
+	//	This test satisfies the FUN-OUTSIDE-CITY requirement.
+	
+	//	Create a location list, initialize all locations.
+	//	Retrieve the city map.
 	//	Check the last or 5th element in the arraylist that it's the outside city.
 	@Test
 	public void testLocNameOutsideCityExists() {
@@ -61,10 +81,15 @@ public class LocationNodeListTest {
 	}
 	
 	
-	//	Ensure that there are a total of 5 locations initialized
-	//	There should always be 5 locations in total that are intialized and set up
-	//	Based on the requirements there are four city locations and one location representing the outside city
-	//	Therefore there should be 5 in total
+	//	################################################################
+	//	########### 	TEST NUMBER OF LOCATIONS CREATED	 ###########
+	//	################################################################
+	
+	
+	//	Ensure that there are a total of 5 locations initialized.
+	//	There should always be 5 locations in total that are intialized and set up.
+	//	Based on the requirements there are four city locations and one location representing the outside city.
+	//	Therefore there should be 5 in total.
 	
 	//	Create a locations list, intialize all locations
 	//	Retrieve the map into an arraylist
@@ -83,16 +108,21 @@ public class LocationNodeListTest {
 	}
 	
 	
-	//	Ensure that setting a new list overwrites the previous list
-	//	If a new list overs the old list, then when the list is retrieved it should be the new one
+	//	#######################################################
+	//	########### 	TEST CITY MAP RETRIEVAL		###########
+	//	#######################################################
 	
-	//	Create a locations list object, which by default has an empty list
-	//	Create an arraylist and add mock location node objects because it doesn't matter
-	//	what information is contained in the location nodes, this test focuses on consistency
-	//	Add all mock objects to the temporary list
-	//	Set the new list 
-	//	Retrieve the list
-	//	Ensure that the retrieve list matches the one that set to it
+	
+	//	Ensure that setting a new list overwrites the previous list.
+	//	If a new list replaces the old list, then when the list is retrieved it should always be the new one.
+	
+	//	Create a locations list object, which by default has an empty list.
+	//	Create an arraylist and add mock location node objects because it doesn't matter.
+	//	what information is contained in the location nodes, this test focuses on consistency.
+	//	Add all mock objects to the temporary list.
+	//	Set the new list .
+	//	Retrieve the list.
+	//	Ensure that the retrieve list matches the one that set to it.
 	
 	//	Test uses test doubles/mocks
 	@Test
@@ -117,12 +147,13 @@ public class LocationNodeListTest {
 		assertSame(tempList, getLocList);
 	}
 	
-	//	Ensure that getting the list of location nodes is empty when a new list is initialized
-	//	When a new location list is created, the default list should always be empty
 	
-	//	Create a new locations list
-	//	Retrieve the city map
-	//	Check that the number of locations in the list is 0
+	//	Ensure that getting the list of location nodes is empty when a new list is initialized.
+	//	When a new location list is created, the default list should always be empty.
+	
+	//	Create a new locations list.
+	//	Retrieve the city map.
+	//	Check that the number of locations in the list is 0.
 	@Test
 	public void testGetListEmpty() {
 		
@@ -135,9 +166,24 @@ public class LocationNodeListTest {
 	}
 	
 	
-	//	Test print traversal by ave
+	//	###########################################################################
+	//	########### 	TEST ALL POSSIBLE DRIVER ROUTES VIA AVENUE		###########
+	//	###########################################################################
+	
+	
+	//	This test checks the print display for each driver's step through the simulation.
+	//	The information that is displayed to the user should match to where the driver
+	//	has actually travelled.
+	
 	//	Test traversal from Presby to Union via Fourth Ave.
-	//	Test requirement FUN-AVENUES
+	//	Created a mock driver and mock locations.
+	//	When information about the driver and locations are retrieved return specific values.
+	//	Set the mock driver and locations as the parameter to the method.
+	//	Ensure that the output of the method matches what is expected.
+	
+	//	Test requirement FUN-AVENUES.
+	
+	//	Test uses stubbing of methods.
 	@Test
 	public void testTraversalByAvenuePresbyToUnion() {
 		Driver mockDriver1 = Mockito.mock(Driver.class);
@@ -158,9 +204,19 @@ public class LocationNodeListTest {
 	}
 	
 	
-	//	Test print traversal by ave
+	//	This test checks the print display for each driver's step through the simulation.
+	//	The information that is displayed to the user should match to where the driver
+	//	has actually travelled.
+	
 	//	Test traversal from Union to Outside City via Fourth Ave.
+	//	Created a mock driver and mock locations.
+	//	When information about the driver and locations are retrieved return specific values.
+	//	Set the mock driver and locations as the parameter to the method.
+	//	Ensure that the output of the method matches what is expected.
+	
 	//	Test requirement FUN-OTHER-CITIES
+	
+	//	Test uses stubbing of methods.
 	@Test
 	public void testTraversalByAvenueUnionToPhil() {
 		Driver mockDriver1 = Mockito.mock(Driver.class);
@@ -182,9 +238,19 @@ public class LocationNodeListTest {
 	}
 	
 	
-	//	Test print traversal by ave
+	//	This test checks the print display for each driver's step through the simulation.
+	//	The information that is displayed to the user should match to where the driver
+	//	has actually travelled.
+	
 	//	Test traversal from Hillman to Sennott via Fifth Ave.
+	//	Created a mock driver and mock locations.
+	//	When information about the driver and locations are retrieved return specific values.
+	//	Set the mock driver and locations as the parameter to the method.
+	//	Ensure that the output of the method matches what is expected.
+	
 	//	Test requirement FUN-AVENUES
+	
+	//	Test uses stubbing of methods.
 	@Test
 	public void testTraversalByAvenueHillmanToSennott() {
 		Driver mockDriver1 = Mockito.mock(Driver.class);
@@ -205,9 +271,19 @@ public class LocationNodeListTest {
 	}
 	
 	
-	//	Test print traversal by ave
+	//	This test checks the print display for each driver's step through the simulation.
+	//	The information that is displayed to the user should match to where the driver
+	//	has actually travelled.
+	
 	//	Test traversal from Sennott to Outside City via Fifth Ave.
+	//	Created a mock driver and mock locations.
+	//	When information about the driver and locations are retrieved return specific values.
+	//	Set the mock driver and locations as the parameter to the method.
+	//	Ensure that the output of the method matches what is expected.
+	
 	//	Test requirement FUN-OTHER-CITIES
+	
+	//	Test uses stubbing of methods.
 	@Test
 	public void testTraversalByAvenueSennottToClev() {
 		Driver mockDriver1 = Mockito.mock(Driver.class);
@@ -228,9 +304,25 @@ public class LocationNodeListTest {
 		assertEquals(expectedOutput, returnString);
 	}
 	
-	//	Test print traversal by street
+	
+	//	###########################################################################
+	//	########### 	TEST ALL POSSIBLE DRIVER ROUTES VIA STREETS		###########
+	//	###########################################################################
+	
+	
+	//	This test checks the print display for each driver's step through the simulation.
+	//	The information that is displayed to the user should match to where the driver
+	//	has actually travelled.
+	
 	//	Test traversal from Sennott to Presby via Bill St.
+	//	Created a mock driver and mock locations.
+	//	When information about the driver and locations are retrieved return specific values.
+	//	Set the mock driver and locations as the parameter to the method.
+	//	Ensure that the output of the method matches what is expected.
+	
 	//	Test requirement FUN-STREETS
+	
+	//	Test uses stubbing of methods.
 	@Test
 	public void testTraversalByStreetSennottToPresby() {
 		Driver mockDriver1 = Mockito.mock(Driver.class);
@@ -250,9 +342,19 @@ public class LocationNodeListTest {
 	}
 	
 	
-	//	Test print traversal by street
+	//	This test checks the print display for each driver's step through the simulation.
+	//	The information that is displayed to the user should match to where the driver
+	//	has actually travelled.
+	
 	//	Test traversal from Presby to Sennott via Bill St.
+	//	Created a mock driver and mock locations.
+	//	When information about the driver and locations are retrieved return specific values.
+	//	Set the mock driver and locations as the parameter to the method.
+	//	Ensure that the output of the method matches what is expected.
+	
 	//	Test requirement FUN-STREETS
+	
+	//	Test uses stubbing of methods.
 	@Test
 	public void testTraversalByStreetPresbyToSennott() {
 		Driver mockDriver1 = Mockito.mock(Driver.class);
@@ -272,9 +374,19 @@ public class LocationNodeListTest {
 	}
 	
 	
-	//	Test print traversal by street
+	//	This test checks the print display for each driver's step through the simulation.
+	//	The information that is displayed to the user should match to where the driver
+	//	has actually travelled.
+	
 	//	Test traversal from Presby to Sennott via Bill St.
+	//	Created a mock driver and mock locations.
+	//	When information about the driver and locations are retrieved return specific values.
+	//	Set the mock driver and locations as the parameter to the method.
+	//	Ensure that the output of the method matches what is expected.
+	
 	//	Test requirement FUN-STREETS
+	
+	//	Test uses stubbing of methods.
 	@Test
 	public void testTraversalByStreetUnionToHillman() {
 		Driver mockDriver1 = Mockito.mock(Driver.class);
@@ -294,9 +406,19 @@ public class LocationNodeListTest {
 	}
 	
 	
-	//	Test print traversal by street
+	//	This test checks the print display for each driver's step through the simulation.
+	//	The information that is displayed to the user should match to where the driver
+	//	has actually travelled.
+	
 	//	Test traversal from Presby to Sennott via Bill St.
+	//	Created a mock driver and mock locations.
+	//	When information about the driver and locations are retrieved return specific values.
+	//	Set the mock driver and locations as the parameter to the method.
+	//	Ensure that the output of the method matches what is expected.
+	
 	//	Test requirement FUN-STREETS
+	
+	//	Test uses stubbing of methods.
 	@Test
 	public void testTraversalByStreetHillmanToUnion() {
 		Driver mockDriver1 = Mockito.mock(Driver.class);
@@ -316,16 +438,31 @@ public class LocationNodeListTest {
 	}
 	
 	
-	//	Check driver start pos if the starting position is Sennott which is recognized by location ID 3
+	//	###################################################################
+	//	########### 	TEST CHECK DRIVER STARTING POSITION 	###########
+	//	###################################################################
+	
+	
+	//	Ensure that if the driver starts at Sennott, that the number of times the driver
+	//	has visited Laboon is incremented by 1 as stated in FUN-SENNOTT-COUNT.
+	//	The number of times the driver visited Laboon should never exceed one if the 
+	//	driver starts there.
+	
+	//	Create a driver and mock location, setting the starting location for the driver
+	//	at the mock location when the driver is created.
+	//	When the location ID of the location is retrieved, return 3 which represents Sennott.
+	//	Then run the method that checks the starting position of the driver to determine 
+	//	whether or not to update the number of visits.
+	
 	//	Tests part of FUN-SENNOTT-COUNT
+	
+	//	Test uses stubbing of methods.
 	@Test
 	public void testCheckStartPosSennott() {
 		LocationNodeList cityMap = new LocationNodeList();
 		
 		LocationNode mockLoc = Mockito.mock(LocationNode.class);
 		Driver testDriver = new Driver(1, mockLoc);
-		
-		testDriver.setNewLocation(mockLoc);
 		
 		Mockito.when(mockLoc.getLocationID()).thenReturn(3);
 		
@@ -335,8 +472,21 @@ public class LocationNodeListTest {
 	}
 	
 	
-	//	Check driver start pos if the starting position is Sennott
+	//	Ensure that if the driver doesn't start at Sennott, that the number of times the driver
+	//	has visited Laboon is not incremented by 1.
+	//	Since the driver hasn't visited Laboon or started their traversal through the city at Sennott,
+	//	the number of visits shouldn't change.
+	
+	//	Create a driver and mock location, setting the starting location for the driver
+	//	at the mock location when the driver is created.
+	//	When the location ID of the location is retrieved, return 1 which represents a location out of Sennott,
+	//	more specifically 1 represents Prebsy.
+	//	Then run the method that checks the starting position of the driver to determine 
+	//	whether or not to update the number of visits.
+	
 	//	Tests part of FUN-SENNOTT-COUNT
+	
+	//	Test uses stubbing of methods.
 	@Test
 	public void testCheckStartPosNotSennott() {
 		LocationNodeList cityMap = new LocationNodeList();
@@ -354,9 +504,24 @@ public class LocationNodeListTest {
 	}
 	
 	
-	//	Check if driver is at the end of the city
-	//	This test checks the condition that the driver is outside of the city
+	//	###########################################################################
+	//	########### 	TEST CHECK DRIVER LEFT OR STILL IN THE CITY 	###########
+	//	###########################################################################
+	
+	
+	//	Check if driver is outside of the city. If the driver is outside of the city then
+	//	return true indicating that the simulation for that driver is complete.
+
+	//	Create a city map, create a mock driver mock location.
+	//	When the driver tries to return it's current position return the mock location.
+	//	When the location ID of the mock location is being retrieved, return 5.
+	//	5 represents the location ID of outside city.
+	//	Since 5 represents the outside city, the return boolean of the method should always
+	//	return true.
+	
 	//	Tests part of requirement FUN-END
+	
+	//	Test uses stubbing of methods.
 	@Test
 	public void testCheckOutsideCityDriverOutsideCity() {
 		LocationNodeList cityMap = new LocationNodeList();
@@ -373,8 +538,17 @@ public class LocationNodeListTest {
 	}
 	
 	
-	//	Check if driver is at the end of the city
-	//	This test checks the condition that the driver is still in the city
+	//	Check if driver is outside of the city. If the driver is inside of the city then
+	//	return false indicating that the simulation for that driver is not complete.
+
+	//	Create a city map, create a mock driver mock location.
+	//	When the driver tries to return it's current position return the mock location.
+	//	When the location ID of the mock location is being retrieved, return 2.
+	//	2 represents the location ID of location in the city, more specifically Union.
+	//	Since 2 represents a location in the city, the return boolean of the method should always
+	//	return false.
+	
+	//	Test uses stubbing of methods.
 	@Test
 	public void testCheckOutsideCityDriverInsideCity() {		
 		LocationNodeList cityMap = new LocationNodeList();
