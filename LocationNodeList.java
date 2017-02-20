@@ -13,13 +13,13 @@ import java.io.*;
 
 public class LocationNodeList {
 
-	private ArrayList<LocationNode> lList;
-	private String outsideCityPhil = "Philadelphia";
-	private String outsideCityClev = "Cleveland";
+	private ArrayList<LocationNode> cityMap;				//	Represents the map of the city, will contain all information pertaining to the city
+	private String outsideCityPhil = "Philadelphia";		//	Name of one of the outside cities
+	private String outsideCityClev = "Cleveland";			//	Name of one of the outside cities
 
 	public LocationNodeList() {
 		
-		lList = new ArrayList<LocationNode>();
+		cityMap = new ArrayList<LocationNode>();
 	}
 	
 	
@@ -54,23 +54,23 @@ public class LocationNodeList {
 		
 		
 		//	Add all locations to list
-		this.lList.add(presby);
-		this.lList.add(union);
-		this.lList.add(sennott);
-		this.lList.add(hillman);
-		this.lList.add(outsideCity);
+		this.cityMap.add(presby);
+		this.cityMap.add(union);
+		this.cityMap.add(sennott);
+		this.cityMap.add(hillman);
+		this.cityMap.add(outsideCity);
 	}
 	
 	
 	//	Set a new city list, primarily used in testing the getCityMap() method
 	public void setCityMap(ArrayList<LocationNode> newList) {
-		this.lList = newList;
+		this.cityMap = newList;
 	}
 	
 	
 	//	Retrieve the current or initialized city map
 	public ArrayList<LocationNode> getCityMap() {
-		return this.lList;
+		return this.cityMap;
 	}
 	
 	
