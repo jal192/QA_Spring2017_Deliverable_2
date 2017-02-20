@@ -13,12 +13,12 @@
 
 public class LocationNode {
 	
-	private String locationName;
-	private LocationNode nextLocByAvenue;
-	private LocationNode nextLocByStreet;
-	private String avenueName;
-	private String streetName;
-	private int locationID;
+	private String locationName;			//	Name of the location
+	private LocationNode nextLocByAvenue;	//	End destination when traveling by avenue
+	private LocationNode nextLocByStreet;	//	End destination when traveling by street
+	private String avenueName;				//	Name of the avenue to get to the next location
+	private String streetName;				//	Name of the street to get to the next location
+	private int locationID;					//	Simple identifier for the location
 	
 	
 	//	Location that represents an outside city
@@ -32,7 +32,7 @@ public class LocationNode {
 		this.streetName = null;
 	}
 	
-	//	Location that represents a building
+	//	Location that represents a building/location in the city
 	public LocationNode(String name, int id, String aveName, String stName) {
 		this.locationName = name;
 		this.locationID = id;
