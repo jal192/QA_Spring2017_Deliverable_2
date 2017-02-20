@@ -3,12 +3,13 @@
 	2/20/17
 	cs1632
 	Deliverable 2
-
-	#########################################
-	####### TODO Need to add comments #######
-	#########################################	
 	
-	Using seed number 3 displays driver needing help message
+	Main program that runs the simulation. Program accepts a single integer argument 
+	that will be used for the seed value, allowing for consistency and reproduction
+	of runs through the simulation to ensure that everything is still working as intended.
+	
+	Note: I found that using seed number 3 displays most of the features of the program.
+	
 */
 
 import java.util.*;
@@ -17,16 +18,16 @@ import java.io.*;
 public class CitySim9004 {
 
 
-	private static boolean valid;
-	private static Integer seed;
-	private static ArrayList<LocationNode> locationList;
-	private static String outsideCityPhil;
-	private static String outsideCityClev;
-	private static int numbDrivers;
-	private static boolean driverLeavesCity;
-	private static int startPos;
-	private static LocationNode nextLocation;
-	private static int selectPath;
+	private static boolean valid;								//	Used to check if the number of arguments is correct
+	private static Integer seed;								//	Seed used for simulation runs
+	private static ArrayList<LocationNode> locationList;		//	Representation of the city map
+	private static String outsideCityPhil;						//	Name of one of the outside cities
+	private static String outsideCityClev;						//	Name of the other outside city
+	private static int numbDrivers;								//	Counter that keeps track of the number of drivers that run through the simulation
+	private static boolean driverLeavesCity;					//	Checks if the user has exited the city
+	private static int startPos;								//	Used to present the starting location of the driver
+	private static LocationNode nextLocation;					//	Variable that stores the next location the driver is heading
+	private static int selectPath;								//	Variable that stores the path the driver will take
 	
 	public static void main(String[] args) {
 		
@@ -68,6 +69,7 @@ public class CitySim9004 {
 					//	Retrieve the starting position from the random number generator
 					startPos = rng.nextInt(4) + 1;
 					
+					//	Retrieve the location that will be where the driver starts
 					LocationNode startPosNode = locationList.get(startPos-1);
 					
 					//	Set the random starting location as the current location of the driver
@@ -89,10 +91,10 @@ public class CitySim9004 {
 						
 						//	If the random value obtained is 1, means that the driver follows the avenue route
 						if(selectPath == 1) {
-							//	Get the location ID corresponding to the next destination when traveling by avenue
+							//	Get the location node corresponding to the next destination when traveling by avenue
 							nextLocation = current.getLocByAvenue();
 							
-							//	Update the driver's location with the next location ID
+							//	Update the driver's location with the next location node
 							driver.setNewLocation(nextLocation);
 							
 							//	Retrieve the location node of the destination that the driver is currently at/travelled to
@@ -103,14 +105,15 @@ public class CitySim9004 {
 							System.out.println(cityMap.printDriverTravelByAvenue(driver, current, endDestination));
 							
 							//	Check if the driver has left the city, if so print the corresponding information
+							//	Return an updated boolean variable if the driver has indeed left
 							driverLeavesCity = cityMap.checkDriverExitCity(driver);
 						}
 						//	If the random value obtained is 2, means that the driver follows the street route
 						else if(selectPath == 2) {
-							//	Get the location ID corresponding to the next destination when traveling by street
+							//	Get the location node corresponding to the next destination when traveling by street
 							nextLocation = current.getLocByStreet();
 							
-							//	Update the driver's location with the next location ID
+							//	Update the driver's location with the next location node
 							driver.setNewLocation(nextLocation);
 							
 							//	Retrieve the location node of the destination that the driver is currently at/travelled to
@@ -133,6 +136,7 @@ public class CitySim9004 {
 					}
 					
 					//	Display the 5 dashes after each run as stated in the FUN-DASHES requirement
+					//	Not going to test this requirement explicitly through a test since it can be seen through trial runs
 					System.out.println("-----");
 					
 					//	Since the current driver has finished his traversal through the city, increment the counter by 1
