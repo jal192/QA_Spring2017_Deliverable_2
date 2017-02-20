@@ -3,10 +3,8 @@
 	2/20/17
 	cs1632
 	Deliverable 2
-	
-	#########################################
-	####### TODO Need to add comments #######
-	#########################################
+
+	Number of Tests: 14
 	
 */
 
@@ -21,25 +19,27 @@ public class LocationNodeTest {
 
 
 	// "B" at the end of the test name represents tests are conducted on a location node object 
-	//		that emulates the information needed for a building
+	//		that emulates the information needed for a building.
 	
 	// "O" at the end of the test name represents tests are conducted on a location node object 
-	//		that emulates the information needed for an outside location
+	//		that emulates the information needed for an outside location.
 	
 	//	Separate tests are conducted on both constructors, one constructor for buildings and other 
-	//		for outside locations
+	//		for outside locations.
 
 	
 	//#########################################################################
 	//###########	TESTS FOR CONSTRUCTOR THAT EMULATES BUILDING	###########
 	//#########################################################################
 	
-	//	The location name that is set should always be the same as the one inputted
-	//	The getLocationName() should always retrieve the name of the location node and 
-	//	not any other information related to the location
+	//	Test the accuracy of the location name that is retrieved.
 	
-	//	Create a test location node, then retrieve the name of the node
-	//	Ensure that it's the same/matches the one inputted
+	//	The location name that is set should always be the same as the one inputted.
+	//	The getLocationName() should always retrieve the name of the location node and 
+	//	not any other information related to the location.
+	
+	//	Create a test location node, then retrieve the name of the node.
+	//	Ensure that it's the same/matches the one inputted.
 	@Test
 	public void testGetLocationName_B() {
 		LocationNode testLoc = new LocationNode("Union", 1, "Fourth Avenue.", "Phil St.");
@@ -47,12 +47,14 @@ public class LocationNodeTest {
 	}
 	
 	
-	//	The location ID that is set should always be the same as the one inputted
-	//	The getLocationID() should always retrieve the ID of the location node and 
-	//	not any other information related to the location
+	//	Test the accuracy of the location ID that is retrieved.
 	
-	//	Create a test location node, then retrieve the ID of the node
-	//	Ensure that it's the same/matches the one inputted
+	//	The location ID that is set should always be the same as the one inputted.
+	//	The getLocationID() should always retrieve the ID of the location node and 
+	//	not any other information related to the location.
+	
+	//	Create a test location node, then retrieve the ID of the node.
+	//	Ensure that it's the same/matches the one inputted.
 	@Test
 	public void testGetLocationID_B() {
 		LocationNode testLoc = new LocationNode("Union", 1, "Fourth Avenue.", "Phil St.");
@@ -60,13 +62,15 @@ public class LocationNodeTest {
 	}
 	
 	
+	//	Test the accuracy of the avenue name that is retrieved.
+	
 	//	The avenue name that the location is connected to should always be the same as 
 	//	the one that is inputted. 
 	//	The getAvenueName() should always retrieve the avenue of the location node and 
-	//	not any other information related to the location
+	//	not any other information related to the location.
 	
-	//	Create a test location node, then retrieve the avenue name of the node
-	//	Ensure that it's the same/matches the one inputted
+	//	Create a test location node, then retrieve the avenue name of the node.
+	//	Ensure that it's the same/matches the one inputted.
 	@Test
 	public void testGetAvenueName_B() {
 		LocationNode testLoc = new LocationNode("Union", 1, "Fourth Avenue.", "Phil St.");
@@ -74,13 +78,15 @@ public class LocationNodeTest {
 	}
 	
 	
+	//	Test the accuracy of the street name that is retrieved.
+	
 	//	The street name that the location is connected to should always be the same as 
 	//	the one that is inputted. 
 	//	The getStreetName() should always retrieve the street of the location node and 
-	//	not any other information related to the location
+	//	not any other information related to the location.
 	
-	//	Create a test location node, then retrieve the street name of the node
-	//	Ensure that it's the same/matches the one inputted
+	//	Create a test location node, then retrieve the street name of the node.
+	//	Ensure that it's the same/matches the one inputted.
 	@Test
 	public void testGetStreetName_B() {
 		LocationNode testLoc = new LocationNode("Union", 1, "Fourth Avenue.", "Phil St.");
@@ -88,12 +94,14 @@ public class LocationNodeTest {
 	}
 	
 	
-	//	A newly created location node object doesn't have another location connected to it by
-	//	using the avenue route. Therefore it should always be the default value of 0.
+	//	Test the accuracy of the location node that is retrieved.
 	
-	//	Create a test location node, then retrieve the location ID if the driver was to travel using
+	//	A newly created location node object doesn't have another location connected to it by
+	//	using the avenue route. Therefore it should always be the default value of null.
+	
+	//	Create a test location node, then retrieve the location node if the driver was to travel using
 	//	the avenue route. 
-	//	Check that the retrieve location ID is 0.
+	//	Check that the retrieved location node is null.
 	@Test
 	public void testGetLocByAvenueNull_B() {
 		LocationNode testLoc = new LocationNode("Union", 1, "Fourth Avenue.", "Phil St.");
@@ -101,12 +109,14 @@ public class LocationNodeTest {
 	}
 	
 	
-	//	A newly created location node object doesn't have another location connected to it by
-	//	using the street route. Therefore it should always be the default value of 0.
+	//	Test the accuracy of the location node that is retrieved.
 	
-	//	Create a test location node, then retrieve the location ID if the driver was to travel using
+	//	A newly created location node object doesn't have another location connected to it by
+	//	using the street route. Therefore it should always be the default value of null.
+	
+	//	Create a test location node, then retrieve the location node if the driver was to travel using
 	//	the street route. 
-	//	Check that the retrieve location ID is 0.
+	//	Check that the retrieved location node is null.
 	@Test
 	public void testGetLocByStreetNull_B() {
 		LocationNode testLoc = new LocationNode("Union", 1, "Fourth Avenue.", "Phil St.");
@@ -114,15 +124,17 @@ public class LocationNodeTest {
 	}
 	
 	
-	//	When making a connection from the intial location to another, the location ID that is set should 
-	//	match the location ID of the destiniation.
-	//	Test ensures that the set ID matches the one that is retrieved.
+	//	Test the accuracy of the location node that is retrieved.
 	
-	//	Create a location node and a mock location node.
-	//	When the node tries to return it's location ID just return 2.
-	//	Set the location ID when traveling by avenue with the location ID of the mock node.
-	//	Then try to retrive the location ID of the destiniation when traveling by avenue and 
-	//	see if it matches the mock location node's id.
+	//	When making a connection from the intial location to another, the location node that is set should 
+	//	match the location node of the destiniation.
+	//	Test ensures that the set node matches the one that is retrieved.
+	
+	//	Create a start location node and a end location node.
+	//	When the node tries to return it's location node just return end location.
+	//	Set the location node when traveling by avenue with the end location node.
+	//	Then try to retrive the location node of the start location when traveling by avenue and 
+	//	see if it matches the end location node.
 	@Test
 	public void testSetLocByAvenue_B() {
 		
@@ -137,15 +149,17 @@ public class LocationNodeTest {
 	}
 	
 	
-	//	When making a connection from the intial location to another, the location ID that is set should 
-	//	match the location ID of the destiniation.
-	//	Test ensures that the set ID matches the one that is retrieved.
+	//	Test the accuracy of the location node that is retrieved.
 	
-	//	Create a location node and a mock location node.
-	//	When the node tries to return it's location ID just return 2.
-	//	Set the location ID when traveling by street with the location ID of the mock node.
-	//	Then try to retrive the location ID of the destiniation when traveling by street and 
-	//	see if it matches the mock location node's id.
+	//	When making a connection from the intial location to another, the location node that is set should 
+	//	match the location node of the destiniation.
+	//	Test ensures that the set node matches the one that is retrieved.
+	
+	//	Create a start location node and a end location node.
+	//	When the node tries to return it's location node just return end location.
+	//	Set the location node when traveling by street with the the end location node.
+	//	Then try to retrive the location node of the start location when traveling by street and 
+	//	see if it matches the end location node.
 	@Test
 	public void testSetLocByStreet_B() {
 		
@@ -165,6 +179,9 @@ public class LocationNodeTest {
 	//###########	TESTS FOR CONSTRUCTOR THAT EMULATES OUTSIDE CITY	###########
 	//#############################################################################
 	
+	
+	//	Test the accuracy of the location name that is retrieved.
+	
 	//	These tests are similar to the tests done to the constructor that emulates a location in the city
 	
 	//	The location name that is set should always be the same as the one inputted
@@ -180,6 +197,8 @@ public class LocationNodeTest {
 	}
 	
 	
+	//	Test the accuracy of the location ID that is retrieved.
+	
 	//	The location ID that is set should always be the same as the one inputted
 	//	The getLocationID() should always retrieve the ID of the location node and 
 	//	not any other information related to the location
@@ -192,6 +211,8 @@ public class LocationNodeTest {
 		assertEquals(5, outsideCity.getLocationID());
 	}
 	
+	
+	//	Test the accuracy of the avenue name that is retrieved.
 	
 	//	The outside city shouldn't be connected to anywhere else, 
 	//	therefore there should be no avenues that the driver can take to get to 
@@ -206,6 +227,8 @@ public class LocationNodeTest {
 	}
 	
 	
+	//	Test the accuracy of the street name that is retrieved.
+	
 	//	The outside city shouldn't be connected to anywhere else, 
 	//	therefore there should be no avenues that the driver can take to get to 
 	//	another destination.
@@ -219,12 +242,14 @@ public class LocationNodeTest {
 	}
 	
 	
-	//	The outside city shouldn't be connected to anywhere else, 
-	//	therefore there should be no destination location ID.
+	//	Test the accuracy of the location node that is retrieved.
 	
-	//	Create a test location node, then retrieve the location ID of the 
+	//	The outside city shouldn't be connected to anywhere else, 
+	//	therefore there should be no destination location node.
+	
+	//	Create a test location node, then retrieve the location null of the 
 	//	destination when traveling by avenue.
-	//	Ensure that the location ID is 0, which indicates that there is no location
+	//	Ensure that the location null is null, which indicates that there is no location
 	//	when traveling by avenue.
 	@Test
 	public void testGetLocByAvenueNull_O() {
@@ -233,12 +258,14 @@ public class LocationNodeTest {
 	}
 	
 	
-	//	The outside city shouldn't be connected to anywhere else, 
-	//	therefore there should be no destination location ID.
+	//	Test the accuracy of the location node that is retrieved.
 	
-	//	Create a test location node, then retrieve the location ID of the 
+	//	The outside city shouldn't be connected to anywhere else, 
+	//	therefore there should be no destination location node.
+	
+	//	Create a test location node, then retrieve the location null of the 
 	//	destination when traveling by street.
-	//	Ensure that the location ID is 0, which indicates that there is no location
+	//	Ensure that the location null is null, which indicates that there is no location
 	//	when traveling by street.
 	@Test
 	public void testGetLocByStreetNull_O() {
