@@ -1,7 +1,6 @@
 /*
 	Jason Ly
 	2/20/17
-	cs1632
 	Deliverable 2
 	
 	This class is used to create the entire city layout and prepare it for use in the 
