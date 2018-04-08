@@ -1,7 +1,6 @@
 /*
 	Jason Ly
 	2/20/17
-	cs1632
 	Deliverable 2
 	
 	Main program that runs the simulation. Program accepts a single integer argument 
