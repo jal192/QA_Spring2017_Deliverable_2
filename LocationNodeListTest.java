@@ -1,7 +1,6 @@
 /*
 	Jason Ly
 	2/20/17
-	cs1632
 	Deliverable 2
 	
 	List of tests that use stubbing of methods (for ease of searching):
